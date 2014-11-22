@@ -1,0 +1,3392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hml version="2.0">
+    <types>
+        <type id="tpe_1" name="boolean" base="numeric" length="1" scale="0">
+            <desc>boolean</desc>
+            <domain>
+                <value is="0"/>
+                <value is="1"/>
+            </domain>
+        </type>
+        <type id="tpe_2" name="integer" base="numeric" length="10" scale="0">
+            <desc>integer</desc>
+            <domain>
+                <value from="-2147483648" to="2147483647"/>
+            </domain>
+        </type>
+        <type id="tpe_ard_default" name="ard_default_type" base="symbolic">
+            <domain ordered="yes">
+                <value is="none" num="1"/>
+            </domain>
+        </type>
+        <type id="tpe_3" name="typeCarAccidents" base="numeric" length="10" scale="0">
+            <desc>The number of accidents in the last yaer</desc>
+            <domain>
+                <value from="0" to="366"/>
+            </domain>
+        </type>
+        <type id="tpe_4" name="typeBaseValue" base="numeric" length="7" scale="2">
+            <desc>The base payment</desc>
+            <domain>
+                <value from="-2147483648" to="2147483647"/>
+            </domain>
+        </type>
+        <type id="tpe_5" name="typeDriverAge" base="numeric" length="10" scale="0">
+            <desc>The age of car, driver, etc</desc>
+            <domain>
+                <value from="18" to="120"/>
+            </domain>
+        </type>
+        <type id="tpe_6" name="typeCarCapacity" base="numeric" length="10" scale="0">
+            <desc>The car capacity in ccm</desc>
+            <domain>
+                <value from="0" to="10000"/>
+            </domain>
+        </type>
+        <type id="tpe_7" name="typeDiscount" base="numeric" length="10" scale="0">
+            <desc>The sum of discounts in percents</desc>
+            <domain>
+                <value from="-100" to="10000"/>
+            </domain>
+        </type>
+        <type id="tpe_8" name="typeDriverClass" base="numeric" length="10" scale="0">
+            <desc>The class of a client</desc>
+            <domain>
+                <value from="-1" to="9"/>
+            </domain>
+        </type>
+        <type id="tpe_9" name="typeInsurancePayment" base="symbolic">
+            <domain ordered="yes">
+                <value is="single" num="1"/>
+                <value is="instalments" num="2"/>
+            </domain>
+        </type>
+        <type id="tpe_11" name="typeInsuranceCars" base="numeric" length="10" scale="0">
+            <domain>
+                <value from="0" to="1000"/>
+            </domain>
+        </type>
+        <type id="tpe_12" name="typeCarSeats" base="numeric" length="10" scale="0">
+            <domain>
+                <value from="1" to="10"/>
+            </domain>
+        </type>
+        <type id="tpe_13" name="typeBase-modifierValue" base="numeric">
+        <domain>
+                <value from="-2147483648" to="2147483647"/>
+            </domain>
+            </type>
+        <type id="tpe_14" name="typeCarAge" base="numeric" length="10" scale="0">
+            <domain>
+                <value from="0" to="200"/>
+            </domain>
+        </type>
+        <type id="tpe_15" name="typeDriverLicage" base="numeric" length="10" scale="0">
+            <domain>
+                <value from="0" to="102"/>
+            </domain>
+        </type>
+    </types>
+    <attributes>
+        <attr id="att_ard_2" type="tpe_ard_default" name="BaseRate" abbrev="Base1" class="simple" comm="io"/>
+        <attr id="att_ard_3" type="tpe_ard_default" name="BonusMalus" abbrev="Bonu1" class="simple" comm="io"/>
+        <attr id="att_ard_1" type="tpe_ard_default" name="CarInsurance" abbrev="CarI1" class="simple" comm="io"/>
+        <attr id="att_ard_7" type="tpe_ard_default" name="CarPremium" abbrev="CarP1" class="simple" comm="io"/>
+        <attr id="att_ard_6" type="tpe_ard_default" name="DriverPremium" abbrev="Driv1" class="simple" comm="io"/>
+        <attr id="att_ard_8" type="tpe_ard_default" name="OtherPremium" abbrev="Othe1" class="simple" comm="io"/>
+        <attr id="att_ard_5" type="tpe_ard_default" name="Payment" abbrev="Paym1" class="simple" comm="io"/>
+        <attr id="att_ard_4" type="tpe_ard_default" name="Premium" abbrev="Prem1" class="simple" comm="io"/>
+        <attr id="att_ard_21" type="tpe_13" name="base-modifierValue" abbrev="base1" class="simple" comm="io">
+            <desc>The sum of others discounts</desc>
+        </attr>
+        <attr id="att_ard_22" type="tpe_4" name="baseValue" abbrev="base2" class="simple" comm="io">
+            <desc>The base insurance charge</desc>
+        </attr>
+        <attr id="att_ard_24" type="tpe_3" name="carAccidents" abbrev="carA2" class="simple" comm="in">
+            <desc>The number of accidents in the last year</desc>
+        </attr>
+        <attr id="att_ard_12" type="tpe_14" name="carAge" abbrev="carA1" class="simple" comm="in">
+            <desc>The car age</desc>
+        </attr>
+        <attr id="att_ard_23" type="tpe_6" name="carCapacity" abbrev="carC1" class="simple" comm="in">
+            <desc>Car capacity</desc>
+        </attr>
+        <attr id="att_ard_13" type="tpe_1" name="carHistoric" abbrev="carH1" class="simple" comm="in">
+            <desc>Indicates if the car is a antique car</desc>
+        </attr>
+        <attr id="att_ard_14" type="tpe_12" name="carSeats" abbrev="carS1" class="simple" comm="in">
+            <desc>The number of seats in the car</desc>
+        </attr>
+        <attr id="att_ard_15" type="tpe_1" name="carTechnical" abbrev="carT1" class="simple" comm="in">
+            <desc>Indicates if a car passed test of technical state</desc>
+        </attr>
+        <attr id="att_ard_9" type="tpe_5" name="driverAge" abbrev="driv1" class="simple" comm="in">
+            <desc>The age of a driver</desc>
+        </attr>
+        <attr id="att_ard_27" type="tpe_8" name="driverClass" abbrev="driv4" class="simple" comm="io">
+            <desc>The class of a client</desc>
+        </attr>
+        <attr id="att_ard_10" type="tpe_15" name="driverLicage" abbrev="driv5" class="simple" comm="in">
+            <desc>The driver age</desc>
+        </attr>
+        <attr id="att_ard_26" type="tpe_11" name="insuranceCars" abbrev="insu5" class="simple" comm="in">
+            <desc>The number of car insurnace</desc>
+        </attr>
+        <attr id="att_ard_20" type="tpe_1" name="insuranceCertificate" abbrev="insu3" class="simple" comm="in">
+            <desc>Indicates if a client has a insurance history</desc>
+        </attr>
+        <attr id="att_ard_18" type="tpe_1" name="insuranceContinue" abbrev="insu1" class="simple" comm="in">
+            <desc>Indicates if it is a insurance continuation</desc>
+        </attr>
+        <attr id="att_ard_19" type="tpe_1" name="insuranceOtherins" abbrev="insu2" class="simple" comm="in">
+            <desc>Indicates if a client has an other insurance</desc>
+        </attr>
+        <attr id="att_ard_17" type="tpe_9" name="insurancePayment" abbrev="insu4" class="simple" comm="in">
+            <desc>The number of installments</desc>
+        </attr>
+        <attr id="att_ard_25" type="tpe_2" name="resultValue" abbrev="resu1" class="simple" comm="out">
+            <desc>The final insurance price</desc>
+        </attr>
+    </attributes>
+    <properties>
+        <property id="prp_1">
+            <attref ref="att_ard_1"/>
+        </property>
+        <property id="prp_2">
+            <attref ref="att_ard_2"/>
+            <attref ref="att_ard_3"/>
+            <attref ref="att_ard_5"/>
+            <attref ref="att_ard_4"/>
+        </property>
+        <property id="prp_3">
+            <attref ref="att_ard_2"/>
+            <attref ref="att_ard_3"/>
+            <attref ref="att_ard_4"/>
+        </property>
+        <property id="prp_4">
+            <attref ref="att_ard_5"/>
+        </property>
+        <property id="prp_5">
+            <attref ref="att_ard_25"/>
+        </property>
+        <property id="prp_6">
+            <attref ref="att_ard_4"/>
+        </property>
+        <property id="prp_7">
+            <attref ref="att_ard_2"/>
+        </property>
+        <property id="prp_8">
+            <attref ref="att_ard_3"/>
+        </property>
+        <property id="prp_9">
+            <attref ref="att_ard_7"/>
+            <attref ref="att_ard_6"/>
+            <attref ref="att_ard_8"/>
+        </property>
+        <property id="prp_10">
+            <attref ref="att_ard_8"/>
+        </property>
+        <property id="prp_11">
+            <attref ref="att_ard_7"/>
+        </property>
+        <property id="prp_12">
+            <attref ref="att_ard_6"/>
+        </property>
+        <property id="prp_13">
+            <attref ref="att_ard_11"/>
+            <attref ref="att_ard_9"/>
+            <attref ref="att_ard_10"/>
+        </property>
+        <property id="prp_14">
+            <attref ref="att_ard_12"/>
+            <attref ref="att_ard_16"/>
+            <attref ref="att_ard_14"/>
+            <attref ref="att_ard_15"/>
+            <attref ref="att_ard_13"/>
+        </property>
+        <property id="prp_15">
+            <attref ref="att_ard_26"/>
+            <attref ref="att_ard_17"/>
+            <attref ref="att_ard_18"/>
+            <attref ref="att_ard_19"/>
+            <attref ref="att_ard_20"/>
+            <attref ref="att_ard_21"/>
+        </property>
+        <property id="prp_16">
+            <attref ref="att_ard_23"/>
+            <attref ref="att_ard_22"/>
+        </property>
+        <property id="prp_17">
+            <attref ref="att_ard_27"/>
+            <attref ref="att_ard_24"/>
+        </property>
+        <property id="prp_18">
+            <attref ref="att_ard_9"/>
+            <attref ref="att_ard_10"/>
+        </property>
+        <property id="prp_19">
+            <attref ref="att_ard_11"/>
+        </property>
+        <property id="prp_20">
+            <attref ref="att_ard_12"/>
+            <attref ref="att_ard_14"/>
+            <attref ref="att_ard_15"/>
+            <attref ref="att_ard_13"/>
+        </property>
+        <property id="prp_21">
+            <attref ref="att_ard_16"/>
+        </property>
+        <property id="prp_22">
+            <attref ref="att_ard_26"/>
+            <attref ref="att_ard_17"/>
+            <attref ref="att_ard_18"/>
+            <attref ref="att_ard_19"/>
+            <attref ref="att_ard_20"/>
+        </property>
+        <property id="prp_23">
+            <attref ref="att_ard_21"/>
+        </property>
+        <property id="prp_24">
+            <attref ref="att_ard_24"/>
+        </property>
+        <property id="prp_25">
+            <attref ref="att_ard_27"/>
+        </property>
+        <property id="prp_26">
+            <attref ref="att_ard_23"/>
+        </property>
+        <property id="prp_27">
+            <attref ref="att_ard_22"/>
+        </property>
+        <property id="prp_28">
+            <attref ref="att_ard_9"/>
+        </property>
+        <property id="prp_29">
+            <attref ref="att_ard_10"/>
+        </property>
+        <property id="prp_30">
+            <attref ref="att_ard_15"/>
+        </property>
+        <property id="prp_31">
+            <attref ref="att_ard_13"/>
+        </property>
+        <property id="prp_32">
+            <attref ref="att_ard_12"/>
+        </property>
+        <property id="prp_33">
+            <attref ref="att_ard_14"/>
+        </property>
+        <property id="prp_34">
+            <attref ref="att_ard_26"/>
+        </property>
+        <property id="prp_35">
+            <attref ref="att_ard_17"/>
+        </property>
+        <property id="prp_36">
+            <attref ref="att_ard_20"/>
+        </property>
+        <property id="prp_37">
+            <attref ref="att_ard_18"/>
+        </property>
+        <property id="prp_38">
+            <attref ref="att_ard_19"/>
+        </property>
+    </properties>
+    <tph>
+        <hist src="prp_1" dst="prp_2"/>
+        <hist src="prp_2" dst="prp_3"/>
+        <hist src="prp_2" dst="prp_4"/>
+        <hist src="prp_4" dst="prp_5"/>
+        <hist src="prp_3" dst="prp_6"/>
+        <hist src="prp_3" dst="prp_7"/>
+        <hist src="prp_3" dst="prp_8"/>
+        <hist src="prp_6" dst="prp_9"/>
+        <hist src="prp_9" dst="prp_10"/>
+        <hist src="prp_9" dst="prp_11"/>
+        <hist src="prp_9" dst="prp_12"/>
+        <hist src="prp_12" dst="prp_13"/>
+        <hist src="prp_11" dst="prp_14"/>
+        <hist src="prp_10" dst="prp_15"/>
+        <hist src="prp_7" dst="prp_16"/>
+        <hist src="prp_8" dst="prp_17"/>
+        <hist src="prp_13" dst="prp_18"/>
+        <hist src="prp_13" dst="prp_19"/>
+        <hist src="prp_14" dst="prp_20"/>
+        <hist src="prp_14" dst="prp_21"/>
+        <hist src="prp_15" dst="prp_22"/>
+        <hist src="prp_15" dst="prp_23"/>
+        <hist src="prp_17" dst="prp_24"/>
+        <hist src="prp_17" dst="prp_25"/>
+        <hist src="prp_16" dst="prp_26"/>
+        <hist src="prp_16" dst="prp_27"/>
+        <hist src="prp_18" dst="prp_28"/>
+        <hist src="prp_18" dst="prp_29"/>
+        <hist src="prp_20" dst="prp_30"/>
+        <hist src="prp_20" dst="prp_31"/>
+        <hist src="prp_20" dst="prp_32"/>
+        <hist src="prp_20" dst="prp_33"/>
+        <hist src="prp_22" dst="prp_34"/>
+        <hist src="prp_22" dst="prp_35"/>
+        <hist src="prp_22" dst="prp_36"/>
+        <hist src="prp_22" dst="prp_37"/>
+        <hist src="prp_22" dst="prp_38"/>
+    </tph>
+    <ard>
+        <dep independent="prp_19" dependent="prp_5"/>
+        <dep independent="prp_21" dependent="prp_5"/>
+        <dep independent="prp_23" dependent="prp_5"/>
+        <dep independent="prp_25" dependent="prp_19"/>
+        <dep independent="prp_25" dependent="prp_25"/>
+        <dep independent="prp_24" dependent="prp_25"/>
+        <dep independent="prp_27" dependent="prp_5"/>
+        <dep independent="prp_26" dependent="prp_27"/>
+        <dep independent="prp_28" dependent="prp_19"/>
+        <dep independent="prp_29" dependent="prp_19"/>
+        <dep independent="prp_31" dependent="prp_21"/>
+        <dep independent="prp_30" dependent="prp_21"/>
+        <dep independent="prp_33" dependent="prp_21"/>
+        <dep independent="prp_32" dependent="prp_21"/>
+        <dep independent="prp_36" dependent="prp_23"/>
+        <dep independent="prp_38" dependent="prp_23"/>
+        <dep independent="prp_37" dependent="prp_23"/>
+        <dep independent="prp_35" dependent="prp_23"/>
+        <dep independent="prp_34" dependent="prp_23"/>
+    </ard>
+    <states>
+        <state id="sts_2" name="input/3">
+            <attref ref="att_ard_18"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_15"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_23"/>
+            <set>
+                <value is="1900"/>
+            </set>
+            <attref ref="att_ard_20"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_10"/>
+            <set>
+                <value is="10"/>
+            </set>
+            <attref ref="att_ard_17"/>
+            <set>
+                <value is="single"/>
+            </set>
+            <attref ref="att_ard_14"/>
+            <set>
+                <value is="5"/>
+            </set>
+            <attref ref="att_ard_27"/>
+            <set>
+                <value is="7"/>
+            </set>
+            <attref ref="att_ard_19"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_9"/>
+            <set>
+                <value is="50"/>
+            </set>
+            <attref ref="att_ard_24"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_13"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_26"/>
+            <set>
+                <value is="2"/>
+            </set>
+            <attref ref="att_ard_12"/>
+            <set>
+                <value is="1"/>
+            </set>
+        </state>
+        <state id="sts_0" name="input/1">
+            <attref ref="att_ard_18"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_15"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_23"/>
+            <set>
+                <value is="997"/>
+            </set>
+            <attref ref="att_ard_20"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_10"/>
+            <set>
+                <value is="2"/>
+            </set>
+            <attref ref="att_ard_17"/>
+            <set>
+                <value is="single"/>
+            </set>
+            <attref ref="att_ard_14"/>
+            <set>
+                <value is="5"/>
+            </set>
+            <attref ref="att_ard_27"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_19"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_9"/>
+            <set>
+                <value is="29"/>
+            </set>
+            <attref ref="att_ard_24"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_13"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_26"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_12"/>
+            <set>
+                <value is="12"/>
+            </set>
+        </state>
+        <state id="sts_1" name="input/2">
+            <attref ref="att_ard_18"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_15"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_23"/>
+            <set>
+                <value is="1900"/>
+            </set>
+            <attref ref="att_ard_20"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_10"/>
+            <set>
+                <value is="2"/>
+            </set>
+            <attref ref="att_ard_17"/>
+            <set>
+                <value is="single"/>
+            </set>
+            <attref ref="att_ard_14"/>
+            <set>
+                <value is="5"/>
+            </set>
+            <attref ref="att_ard_27"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_19"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_9"/>
+            <set>
+                <value is="23"/>
+            </set>
+            <attref ref="att_ard_24"/>
+            <set>
+                <value is="0"/>
+            </set>
+            <attref ref="att_ard_13"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_26"/>
+            <set>
+                <value is="1"/>
+            </set>
+            <attref ref="att_ard_12"/>
+            <set>
+                <value is="14"/>
+            </set>
+        </state>
+    </states>
+    <xtt>
+        <table id="tab_4" name="MAIN">
+            <schm>
+                <precondition>
+                    <attref ref="att_ard_21"/>
+                    <attref ref="att_ard_22"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_ard_25"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_58">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <expr name="add">
+                            <attref ref="att_ard_22"/>
+                            <expr name="mul">
+                                <attref ref="att_ard_22"/>
+                                <expr name="div">
+                                    <attref ref="att_ard_21"/>
+                                    <value is="100.000"/>
+                                </expr>
+                            </expr>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+        <table id="tab_1" name="bonus-malus">
+            <schm>
+                <precondition>
+                    <attref ref="att_ard_24"/>
+                    <attref ref="att_ard_27"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_ard_27"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_5">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="-1" to="8"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <expr name="add">
+                            <attref ref="att_ard_27"/>
+                            <value is="1"/>
+                        </expr>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_11">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="9"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="9"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_12">
+                <condition>
+                    <relation name="gt">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="-1"/>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="-1"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_13">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_15">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="2" to="5"/>
+                            <value is="8"/>
+                            <value is="9"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_27"/>
+                            <value is="2"/>
+                        </expr>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_16">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="6" to="7"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_27"/>
+                            <value is="3"/>
+                        </expr>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_14">
+                <condition>
+                    <relation name="gt">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="1" to="2"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="-1"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_17">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="3"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_18">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="4" to="5"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_19">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="6"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_20">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="7" to="8"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="3"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_21">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="9"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="4"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_22">
+                <condition>
+                    <relation name="gt">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value from="-1" to="8"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="-1"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_23">
+                <condition>
+                    <relation name="gt">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="9"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+            <rule id="rul_48">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_24"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_27"/>
+                        <attref ref="att_ard_27"/>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_2"/>
+                </link>
+            </rule>
+        </table>
+        <table id="tab_2" name="base-charge">
+            <schm>
+                <precondition>
+                    <attref ref="att_ard_23"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_ard_22"/>
+                    <attref ref="att_ard_25"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_6">
+                <condition>
+                    <relation name="lt">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value is="900"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="537.00"/>
+                        </set>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <set>
+                            <value is="537"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+            <rule id="rul_7">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value from="901" to="1300"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="753.00"/>
+                        </set>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <set>
+                            <value is="753"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+            <rule id="rul_8">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value from="1301" to="1600"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="1050.00"/>
+                        </set>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <set>
+                            <value is="1050"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+            <rule id="rul_9">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value from="1601" to="2000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="1338.00"/>
+                        </set>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <set>
+                            <value is="1338"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+            <rule id="rul_10">
+                <condition>
+                    <relation name="gt">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value is="2000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <set>
+                            <value is="1536.00"/>
+                        </set>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <set>
+                            <value is="1536"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+            <rule id="rul_49">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_23"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_22"/>
+                        <attref ref="att_ard_22"/>
+                    </trans>
+                    <trans>
+                        <attref ref="att_ard_25"/>
+                        <attref ref="att_ard_25"/>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_3"/>
+                </link>
+            </rule>
+        </table>
+        <table id="tab_3" name="base-charge-modifiers">
+            <schm>
+                <precondition>
+                    <attref ref="att_ard_27"/>
+                    <attref ref="att_ard_9"/>
+                    <attref ref="att_ard_12"/>
+                    <attref ref="att_ard_17"/>
+                    <attref ref="att_ard_18"/>
+                    <attref ref="att_ard_26"/>
+                    <attref ref="att_ard_19"/>
+                    <attref ref="att_ard_13"/>
+                    <attref ref="att_ard_10"/>
+                    <attref ref="att_ard_14"/>
+                    <attref ref="att_ard_15"/>
+                    <attref ref="att_ard_20"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_ard_21"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_22">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="-1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="160"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_23">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="60"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_24">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_25">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-10.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_26">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="3"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-20.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_27">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="4"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-30.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_28">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="5"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-40.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_29">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="6"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-40.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_30">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="7"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-50.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_31">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="8"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-50.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_32">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="9"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <set>
+                            <value is="-60.000"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_33">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value from="40" to="55"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="10"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_34">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="lte">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="2"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <expr name="add">
+                                <attref ref="att_ard_21"/>
+                                <expr name="mul">
+                                    <value is="5"/>
+                                    <attref ref="att_ard_12"/>
+                                </expr>
+                            </expr>
+                            <value is="20.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_36">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="single"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="10"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_37">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="10"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_38">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="gt">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="10"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_39">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="20"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_40">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="1"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="sub">
+                            <attref ref="att_ard_21"/>
+                            <value is="50.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_41">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="lt">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="25"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="50.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_42">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="lt">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="3"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="30.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_43">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="gt">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="10"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="15.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_44">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value from="6" to="9"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="20.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_45">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="20.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_46">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="instalments"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="10"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_47">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="0"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <expr name="add">
+                            <attref ref="att_ard_21"/>
+                            <value is="60.000"/>
+                        </expr>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_48">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_ard_27"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_9"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_12"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_17"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_18"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_26"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_19"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_13"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_10"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_14"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_15"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_ard_20"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_ard_21"/>
+                        <attref ref="att_ard_21"/>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_4"/>
+                    <rulref ref="rul_58"/>
+                </link>
+            </rule>
+        </table>
+    </xtt>
+    <callbacks/>
+</hml>

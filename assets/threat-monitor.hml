@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hml version="2.0">
+    <types>
+        <type id="tpe_1" name="boolean" base="numeric" length="1" scale="0">
+            <desc>boolean</desc>
+            <domain>
+                <value is="0"/>
+                <value is="1"/>
+            </domain>
+        </type>
+        <type id="tpe_2" name="integer" base="numeric" length="10" scale="0">
+            <desc>integer</desc>
+            <domain>
+                <value from="-2147483648" to="2147483647"/>
+            </domain>
+        </type>
+        <type id="tpe_ard_default" name="ard_default_type" base="symbolic">
+            <domain ordered="yes">
+                <value is="none" num="1"/>
+            </domain>
+        </type>
+        <type id="tpe_3" name="location_type" base="symbolic">
+            <domain ordered="no">
+                <value is="home"/>
+                <value is="work"/>
+                <value is="outside"/>
+            </domain>
+        </type>
+        <type id="tpe_4" name="time_type" base="symbolic">
+            <domain ordered="no">
+                <value is="morning"/>
+                <value is="noon"/>
+                <value is="afternoon"/>
+                <value is="evening"/>
+                <value is="night"/>
+            </domain>
+        </type>
+        <type id="tpe_5" name="hour_type" base="numeric">
+            <domain>
+                <value from="0.000" to="23.000"/>
+            </domain>
+        </type>
+        <type id="tpe_6" name="today_type" base="symbolic">
+            <domain ordered="no">
+                <value is="weekend"/>
+                <value is="workday"/>
+            </domain>
+        </type>
+        <type id="tpe_7" name="action_type" base="symbolic">
+            <domain ordered="no">
+                <value is="leaving"/>
+                <value is="working"/>
+                <value is="sleeping"/>
+                <value is="travelling"/>
+            </domain>
+        </type>
+        <type id="tpe_8" name="day_type" base="symbolic">
+            <domain ordered="yes">
+                <value is="mon" num="1"/>
+                <value is="tue" num="2"/>
+                <value is="wed" num="3"/>
+                <value is="thu" num="4"/>
+                <value is="fri" num="5"/>
+                <value is="sat" num="6"/>
+                <value is="sun" num="7"/>
+            </domain>
+        </type>
+        <type id="tpe_9" name="threat_type" base="symbolic">
+            <domain ordered="no">
+                <value is="road_threat"/>
+                <value is="pedestrian_threat"/>
+                <value is="building_threat"/>
+            </domain>
+        </type>
+        <type id="tpe_10" name="activity_type" base="symbolic">
+            <domain ordered="no">
+                <value is="walking"/>
+                <value is="driving"/>
+                <value is="cycling"/>
+                <value is="idle"/>
+                <value is="running"/>
+            </domain>
+        </type>
+    </types>
+    <attributes>
+        <attr id="att_xtt_5" type="tpe_7" name="action" abbrev="acti1" class="simple" comm="io"/>
+        <attr id="att_xtt_8" type="tpe_10" name="activity" abbrev="acti2" class="simple" comm="in"/>
+        <attr id="att_xtt_6" type="tpe_8" name="day" abbrev="day1" class="simple" comm="io"/>
+        <attr id="att_xtt_2" type="tpe_4" name="daytime" abbrev="dayt1" class="simple" comm="io"/>
+        <attr id="att_xtt_3" type="tpe_5" name="hour" abbrev="hour1" class="simple" comm="io"/>
+        <attr id="att_xtt_1" type="tpe_3" name="location" abbrev="loca1" class="simple" comm="in"/>
+        <attr id="att_xtt_4" type="tpe_6" name="today" abbrev="toda1" class="simple" comm="io"/>
+        <attr id="att_xtt_7" type="tpe_9" name="threat" abbrev="thr1" class="general" comm="out"/>
+    </attributes>
+    <states/>
+    <xtt>
+        <table id="tab_2" name="DayTime">
+            <desc>Day Time</desc>
+            <schm>
+                <precondition>
+                    <attref ref="att_xtt_3"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_xtt_2"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_4">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value from="14.000" to="18.000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="afternoon"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_2">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value from="6.000" to="11.000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="morning"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_4"/>
+                </link>
+            </rule>
+            <rule id="rul_5">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value from="19.000" to="23.000"/>
+                            <value from="0.000" to="5.000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="night"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_3">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value from="12.000" to="13.000"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="noon"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+        <table id="tab_3" name="Today">
+            <schm>
+                <precondition>
+                    <attref ref="att_xtt_6"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_xtt_4"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_6">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_6"/>
+                        <set>
+                            <value from="mon" to="fri"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="workday"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_4"/>
+                </link>
+            </rule>
+            <rule id="rul_7">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_6"/>
+                        <set>
+                            <value from="sat" to="sun"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="weekend"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+        <table id="tab_4" name="Actions">
+            <schm>
+                <precondition>
+                    <attref ref="att_xtt_1"/>
+                    <attref ref="att_xtt_2"/>
+                    <attref ref="att_xtt_4"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_xtt_5"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_8">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="home"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="morning"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="workday"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="leaving"/>
+                        </set>
+                    </trans>
+                </decision>
+                <link>
+                    <tabref ref="tab_5"/>
+                </link>
+            </rule>
+            <rule id="rul_10">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="home"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="night"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="sleeping"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_9">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="work"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="afternoon"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="workday"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="leaving"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_11">
+                <condition>
+                    <relation name="eq">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="outside"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="travelling"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+        <table id="tab_5" name="Threats">
+            <schm>
+                <precondition>
+                    <attref ref="att_xtt_5"/>
+                    <attref ref="att_xtt_8"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_xtt_7"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_12">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="leaving"/>
+                            <value is="travelling"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_8"/>
+                        <set>
+                            <value is="walking"/>
+                            <value is="running"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_7"/>
+                        <set>
+                            <value is="pedestrian_threat"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_13">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="leaving"/>
+                            <value is="travelling"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_8"/>
+                        <set>
+                            <value is="driving"/>
+                            <value is="cycling"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_7"/>
+                        <set>
+                            <value is="road_threat"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_14">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_5"/>
+                        <set>
+                            <value is="sleeping"/>
+                            <value is="working"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_8"/>
+                        <set>
+                            <value is="idle"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_7"/>
+                        <set>
+                            <value is="building_threat"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+    </xtt>
+    <callbacks/>
+</hml>

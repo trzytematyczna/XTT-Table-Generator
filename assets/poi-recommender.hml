@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hml version="2.0">
+    <types>
+        <type id="tpe_ard_default" name="ard_default_type" base="symbolic">
+            <domain>
+                <value is="none"/>
+            </domain>
+        </type>
+        <type id="tpe_1" name="boolean" base="numeric" length="1" scale="0">
+            <desc>boolean</desc>
+            <domain>
+                <value is="0"/>
+                <value is="1"/>
+            </domain>
+        </type>
+        <type id="tpe_2" name="integer" base="numeric" length="10" scale="0">
+            <desc>integer</desc>
+            <domain>
+                <value from="-2147483648" to="2147483647"/>
+            </domain>
+        </type>
+        <type id="tpe_3" name="activity_type" base="symbolic">
+            <desc>User activity</desc>
+            <domain ordered="no">
+                <value is="walking"/>
+                <value is="driving"/>
+                <value is="running"/>
+                <value is="still"/>
+            </domain>
+        </type>
+        <type id="tpe_4" name="interests_type" base="symbolic">
+            <desc>Different user interests</desc>
+            <domain ordered="no">
+                <value is="sport"/>
+                <value is="shopping"/>
+                <value is="culture"/>
+                <value is="sightseeing"/>
+                <value is="eating"/>
+                <value is="entertainment"/>
+            </domain>
+        </type>
+        <type id="tpe_5" name="weather_type" base="symbolic">
+            <desc>Wheater type</desc>
+            <domain ordered="no">
+                <value is="sunny"/>
+                <value is="rainy"/>
+                <value is="cloudy"/>
+            </domain>
+        </type>
+        <type id="tpe_6" name="poi_type" base="symbolic">
+            <desc>Different points of interests</desc>
+            <domain ordered="no">
+                <value is="indoor-eating"/>
+                <value is="outdor-eating"/>
+                <value is="drivethrough-eating"/>
+                <value is="indoor-sports"/>
+                <value is="outdoor-sports"/>
+                <value is="theatre-cinema"/>
+                <value is="monuments"/>
+                <value is="indoor-concert"/>
+                <value is="outdoor-concert"/>
+                <value is="museum"/>
+                <value is="shopping-center"/>
+            </domain>
+        </type>
+        <type id="tpe_7" name="hour_type" base="numeric">
+            <domain>
+                <value from="0.000" to="23.000"/>
+            </domain>
+        </type>
+    </types>
+    <attributes>
+        <attr id="att_xtt_3" type="tpe_3" name="activity" abbrev="acti1" class="simple" comm="io"/>
+        <attr id="att_xtt_5" type="tpe_7" name="hour" abbrev="hour1" class="simple" comm="io"/>
+        <attr id="att_xtt_4" type="tpe_6" name="poi" abbrev="poi1" class="simple" comm="io"/>
+        <attr id="att_xtt_1" type="tpe_5" name="weather" abbrev="weat1" class="simple" comm="io"/>
+        <attr id="att_xtt_2" type="tpe_4" name="user_profile" abbrev="user1" class="general" comm="io"/>
+    </attributes>
+    <states/>
+    <xtt>
+        <table id="tab_2" name="Recommendations">
+            <schm>
+                <precondition>
+                    <attref ref="att_xtt_1"/>
+                    <attref ref="att_xtt_2"/>
+                    <attref ref="att_xtt_3"/>
+                </precondition>
+                <conclusion>
+                    <attref ref="att_xtt_4"/>
+                </conclusion>
+            </schm>
+            <rule id="rul_2">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="sunny"/>
+                            <value is="cloudy"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="eating"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="outdor-eating"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_3">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="rainy"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="eating"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="walking"/>
+                            <value is="running"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="indoor-eating"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_4">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="rainy"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="eating"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="driving"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="drivethrough-eating"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_5">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="rainy"/>
+                            <value is="cloudy"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="culture"/>
+                            <value is="entertainment"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="walking"/>
+                            <value is="driving"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="theatre-cinema"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_7">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="rainy"/>
+                            <value is="cloudy"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="culture"/>
+                            <value is="sightseeing"/>
+                        </set>
+                    </relation>
+                    <relation name="in">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="walking"/>
+                            <value is="driving"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="museum"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+            <rule id="rul_6">
+                <condition>
+                    <relation name="in">
+                        <attref ref="att_xtt_1"/>
+                        <set>
+                            <value is="sunny"/>
+                        </set>
+                    </relation>
+                    <relation name="sim">
+                        <attref ref="att_xtt_2"/>
+                        <set>
+                            <value is="sightseeing"/>
+                            <value is="culture"/>
+                        </set>
+                    </relation>
+                    <relation name="eq">
+                        <attref ref="att_xtt_3"/>
+                        <set>
+                            <value is="any"/>
+                        </set>
+                    </relation>
+                </condition>
+                <decision>
+                    <trans>
+                        <attref ref="att_xtt_4"/>
+                        <set>
+                            <value is="monuments"/>
+                        </set>
+                    </trans>
+                </decision>
+            </rule>
+        </table>
+    </xtt>
+    <callbacks/>
+</hml>
