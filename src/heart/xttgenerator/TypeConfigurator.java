@@ -2,6 +2,7 @@ package heart.xttgenerator;
 
 import java.util.Random;
 
+import heart.alsvfd.SetValue;
 import heart.xtt.Type;
 
 public class TypeConfigurator {
@@ -25,23 +26,17 @@ public class TypeConfigurator {
 	private Integer[] lengthParam;
 	private String base;
 	private Double[] baseParam;
-	private Integer step;
-	private Double[] domainParam;
-	private String desc;
 	private String ordered;
 	private Double[] orderedParam;
 	private String description;
 	private Integer precision;
-	private String domain;
+	private Integer precisionParam;
+	private SetValue domain;
+	private Double[] domainParam;
 	private Integer domainCount;
 	
 	public TypeConfigurator() {
 		super();
-		this.base = null;
-		this.domain = null;
-		this.desc = null;
-		this.ordered = null;
-		this.step = null;
 		TypeConfigurator.TYPE_COUNTER++;
 	}
 	
@@ -50,11 +45,11 @@ public class TypeConfigurator {
 		return isValid;
 	}
 	
-	public Type generateType(Random random){
+	public Type generateType(Random random) throws Exception{
 		Type type = null;
 		if (this.validateConfiguration()){
 			Type.Builder builder = new Type.Builder();
-			if (this.description != null) builder.setId(this.description);
+			if (this.id != null) builder.setId(this.description);
 			else builder.setId(new String(GEN_ID + TYPE_COUNTER));
 			if (this.name != null) builder.setName(this.name);
 			else builder.setName(new String(GEN_NAME + TYPE_COUNTER));
@@ -92,11 +87,16 @@ public class TypeConfigurator {
 			}
 			if (this.description != null) builder.setDescription(this.description);
 			else builder.setDescription(new String(GEN_DESC + TYPE_COUNTER));
-//			builder.setPrecision(this.precision);
+			if (this.precision != null) builder.setPrecision(this.precision);
+			else {
+				Integer pickedPrecision = random.nextInt(this.precisionParam);
+				builder.setPrecision(pickedPrecision);
+			}
 //			builder.setDomain()
+			type = builder.build();
 		}
 		else{
-			
+			throw new Exception(); //TODO exception
 		}
 		return type;
 	}
