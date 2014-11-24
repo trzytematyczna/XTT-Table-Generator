@@ -6,7 +6,7 @@ import heart.alsvfd.SetValue;
 
 public class SetValueConfigurator {
 
-	public SetValue generate(Random random){
+	public SetValue generateSetValue(Random random){
 		return new SetValue();
 	}
 	

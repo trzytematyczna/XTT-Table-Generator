@@ -8,6 +8,13 @@ import heart.xtt.Type;
 
 public class TypeConfigurator {
 
+	private static int TYPE_COUNTER = 0;
+	private static LinkedList<Type> types;
+	
+	private final static String GEN_ID = "id";
+	private final static String GEN_NAME = "name";
+	private final static String GEN_DESC = "desc";
+	
 	private String id;
 	private String name;
 	private Integer length;
@@ -130,13 +137,6 @@ public class TypeConfigurator {
 	public void setDomainParam(SetValueConfigurator domainParam) {
 		this.domainParam = domainParam;
 	}
-
-	private static int TYPE_COUNTER = 0;
-	private static LinkedList<Type> types;
-	
-	private final static String GEN_ID = "id";
-	private final static String GEN_NAME = "name";
-	private final static String GEN_DESC = "desc";
 	
 	public boolean validateConfiguration(){
 		Boolean isValid = true;
@@ -153,7 +153,7 @@ public class TypeConfigurator {
 			else builder.setName(new String(GEN_NAME + TYPE_COUNTER));
 			if (this.length != null) builder.setLength(this.length);
 			else {
-				Integer pickedLength = random.nextInt(this.lengthParam[this.lengthParam[1] - this.lengthParam[0]]) + this.lengthParam[0];
+				Integer pickedLength = random.nextInt(this.lengthParam[1] - this.lengthParam[0]) + this.lengthParam[0];
 				builder.setLength(pickedLength);
 			}
 			String pickedBase = this.base;
@@ -192,7 +192,7 @@ public class TypeConfigurator {
 			}
 			if (this.domain != null) builder.setDomain(this.domain);
 			else{
-				this.domainParam.generate(random);
+				this.domainParam.generateSetValue(random);
 			}
 			type = builder.build();
 		}
