@@ -1,25 +1,13 @@
 package heart.xttgenerator;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import heart.alsvfd.SetValue;
 import heart.xtt.Type;
 
 public class TypeConfigurator {
-/*
- * Type = "xtype" "[" "name" ":" String ","
-                   "base" ":" ("numeric" / "symbolic") ","
-		           "domain" ":" List ","
-		           "desc" ":" String ","
-                   "ordered" ":" Boolean  
-                   "step" ":" Integer "]" "."
- */
-	private static int TYPE_COUNTER = 0;
-	
-	private final static String GEN_ID = "id";
-	private final static String GEN_NAME = "name";
-	private final static String GEN_DESC = "desc";
-	
+
 	private String id;
 	private String name;
 	private Integer length;
@@ -32,13 +20,123 @@ public class TypeConfigurator {
 	private Integer precision;
 	private Integer precisionParam;
 	private SetValue domain;
-	private Double[] domainParam;
-	private Integer domainCount;
+	private SetValueConfigurator domainParam;
 	
 	public TypeConfigurator() {
 		super();
 		TypeConfigurator.TYPE_COUNTER++;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getLength() {
+		return length;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+
+	public Integer[] getLengthParam() {
+		return lengthParam;
+	}
+
+	public void setLengthParam(Integer[] lengthParam) {
+		this.lengthParam = lengthParam;
+	}
+
+	public String getBase() {
+		return base;
+	}
+
+	public void setBase(String base) {
+		this.base = base;
+	}
+
+	public Double[] getBaseParam() {
+		return baseParam;
+	}
+
+	public void setBaseParam(Double[] baseParam) {
+		this.baseParam = baseParam;
+	}
+
+	public String getOrdered() {
+		return ordered;
+	}
+
+	public void setOrdered(String ordered) {
+		this.ordered = ordered;
+	}
+
+	public Double[] getOrderedParam() {
+		return orderedParam;
+	}
+
+	public void setOrderedParam(Double[] orderedParam) {
+		this.orderedParam = orderedParam;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(Integer precision) {
+		this.precision = precision;
+	}
+
+	public Integer getPrecisionParam() {
+		return precisionParam;
+	}
+
+	public void setPrecisionParam(Integer precisionParam) {
+		this.precisionParam = precisionParam;
+	}
+
+	public SetValue getDomain() {
+		return domain;
+	}
+
+	public void setDomain(SetValue domain) {
+		this.domain = domain;
+	}
+
+	public SetValueConfigurator getDomainParam() {
+		return domainParam;
+	}
+
+	public void setDomainParam(SetValueConfigurator domainParam) {
+		this.domainParam = domainParam;
+	}
+
+	private static int TYPE_COUNTER = 0;
+	private static LinkedList<Type> types;
+	
+	private final static String GEN_ID = "id";
+	private final static String GEN_NAME = "name";
+	private final static String GEN_DESC = "desc";
 	
 	public boolean validateConfiguration(){
 		Boolean isValid = true;
@@ -92,12 +190,16 @@ public class TypeConfigurator {
 				Integer pickedPrecision = random.nextInt(this.precisionParam);
 				builder.setPrecision(pickedPrecision);
 			}
-//			builder.setDomain()
+			if (this.domain != null) builder.setDomain(this.domain);
+			else{
+				this.domainParam.generate(random);
+			}
 			type = builder.build();
 		}
 		else{
 			throw new Exception(); //TODO exception
 		}
+		TypeConfigurator.types.add(type);
 		return type;
 	}
 	
