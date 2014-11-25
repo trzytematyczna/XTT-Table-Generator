@@ -9,7 +9,7 @@ import heart.xtt.Type;
 public class TypeConfigurator {
 
 	private static int TYPE_COUNTER = 0;
-	private static LinkedList<Type> types;
+	private static LinkedList<Type> types = new LinkedList<Type>();
 	
 	private final static String GEN_ID = "id";
 	private final static String GEN_NAME = "name";
@@ -139,8 +139,18 @@ public class TypeConfigurator {
 	}
 	
 	public boolean validateConfiguration(){
-		Boolean isValid = true;
-		return isValid;
+		if (this.length == null && this.lengthParam == null) return false;
+		if (this.length == null && this.lengthParam != null && (this.lengthParam.length != 2 || (this.lengthParam[0] >= this.lengthParam[1]) || this.lengthParam[0] < 0 || this.lengthParam[1] < 0)) return false;
+		if (this.base == null && this.baseParam == null) return false;
+		if (this.base != null && !(this.base.equals(Type.BASE_NUMERIC) || this.base.equals(Type.BASE_SYMBOLIC) || this.base.equals(Type.BASE_UNKNOWN))) return false;
+		if (this.ordered == null && this.orderedParam == null) return false;
+		if (this.ordered != null && !(this.ordered.equals(Type.ORDERED_YES) || this.ordered.equals(Type.ORDERED_NO) || this.ordered.equals(Type.ORDERED_UNKNOWN))) return false;
+		if (this.base != null && this.base.equals(Type.BASE_NUMERIC) && this.ordered != null && (this.ordered.equals(Type.ORDERED_NO) || this.ordered.equals(Type.ORDERED_UNKNOWN))) return false;
+		if (this.precision == null && this.precisionParam == null) return false;
+		if (this.precision == null && this.precisionParam != null && this.precisionParam < 0) return false;
+		if (this.domain == null && this.domainParam == null) return false;
+		if (this.domain == null && this.domainParam.validateConfiguration() == false) return false;
+		return true;
 	}
 	
 	public Type generateType(Random random) throws Exception{
