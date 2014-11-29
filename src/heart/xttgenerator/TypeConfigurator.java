@@ -29,11 +29,6 @@ public class TypeConfigurator {
 	private SetValue domain;
 	private SetValueConfigurator domainParam;
 	
-	public TypeConfigurator() {
-		super();
-		TypeConfigurator.TYPE_COUNTER++;
-	}
-	
 	public String getId() {
 		return id;
 	}
@@ -202,13 +197,14 @@ public class TypeConfigurator {
 			}
 			if (this.domain != null) builder.setDomain(this.domain);
 			else{
-				this.domainParam.generateSetValue(random);
+				builder.setDomain(this.domainParam.generateSetValue(random, pickedBase));
 			}
 			type = builder.build();
 		}
 		else{
 			throw new Exception(); //TODO exception
 		}
+		TypeConfigurator.TYPE_COUNTER++;
 		TypeConfigurator.types.add(type);
 		return type;
 	}

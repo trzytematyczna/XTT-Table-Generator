@@ -4,11 +4,16 @@ import static org.junit.Assert.*;
 import heart.alsvfd.SetValue;
 import heart.xtt.Type;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
 import org.junit.Test;
+import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.JsonGenerationException;
 
@@ -26,13 +31,34 @@ public class TypeConfiguratorTest {
 		typeConfigurator.setLengthParam(new Integer[]{3, 5});
 		typeConfigurator.setOrdered(Type.ORDERED_NO);
 		typeConfigurator.setPrecision(4);
-		typeConfigurator.setDomain(new SetValue());
+		typeConfigurator.setDomainParam(new SetValueConfigurator());
+		
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.getSerializationConfig().addMixInAnnotations(SetValue.class, MixIn.class);
+//		mapper.getSerializationConfig().addMixInAnnotations(SetValue.class, MixIn.class);
+		mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
 		String typeConfiguratorString = mapper.writeValueAsString(typeConfigurator);
-		System.out.println(typeConfiguratorString);
-		TypeConfigurator typeConfiguratorParsed = mapper.readValue(typeConfiguratorString, TypeConfigurator.class);
+		
+
+		File file = new File("TypeConfiguration.txt");
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(typeConfiguratorString);
+		bw.close();
+		
 		Type type = typeConfigurator.generateType(new Random());
+//		String typeString = mapper.writeValueAsString(type);
+//		
+//		file = new File("GeneratedType.txt");
+//		if (!file.exists()) {
+//			file.createNewFile();
+//		}
+//		fw = new FileWriter(file.getAbsoluteFile());
+//		bw = new BufferedWriter(fw);
+//		bw.write(typeString);
+//		bw.close();
 	}
 
 }
