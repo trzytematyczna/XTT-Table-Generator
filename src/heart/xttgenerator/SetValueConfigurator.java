@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import heart.alsvfd.SetValue;
+import heart.alsvfd.SimpleNumeric;
 import heart.alsvfd.SimpleSymbolic;
 import heart.alsvfd.Value;
 import heart.xtt.Type;
@@ -17,6 +18,8 @@ public class SetValueConfigurator {
 	
 	private LinkedList<Value> values;
 	private double[] valuesParam;
+	private double[] valuesSetParam;
+	private double[] rangeSimpleParam;
 	private int[] valuesLengthParam;
 	private String baseParam;
 	
@@ -36,7 +39,16 @@ public class SetValueConfigurator {
 			if (this.values != null){
 				return new SetValue(values);
 			}
-			if (base.equals(Type.BASE_NUMERIC)) {
+			else if (base.equals(Type.BASE_NUMERIC)) {
+				//TODO what about Range
+				if (valuesLengthParam != null) {
+					int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]) + this.valuesLengthParam[0];
+					LinkedList<Value> values = new LinkedList<Value>();
+					for (int i = 0; i < number; i++) {
+						values.add(new SimpleNumeric());
+					}
+					return new SetValue(values);
+				}
 				
 			}
 			else if (base.equals(Type.BASE_SYMBOLIC)) {
