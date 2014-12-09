@@ -6,8 +6,6 @@ import heart.xtt.Type;
 import java.util.LinkedList;
 import java.util.Random;
 
-import org.w3c.dom.Attr;
-
 /*
  * PYTANIA:
  * 
@@ -101,11 +99,6 @@ public class AttributeConfigurator {
 	private String callback; ??
 	private Long expirationTime; ---------- brak w builderze
 	private Type type; done ?
-	
-	public static final String CLASS_SIMPLE = "simple";
-	public static final String CLASS_GENERAL ="general";
-	public static final String CLASS_UNKNOWN ="unknown";
-
 	 */
 	public Attribute generateAttribute(Random random, LinkedList<Type> types) throws Exception{
 		Attribute attribute = null;
