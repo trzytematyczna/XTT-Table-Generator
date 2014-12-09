@@ -152,7 +152,7 @@ public class TypeConfigurator {
 		Type type = null;
 		if (this.validateConfiguration()){
 			Type.Builder builder = new Type.Builder();
-			if (this.id != null) builder.setId(this.description);
+			if (this.id != null) builder.setId(this.id);
 			else builder.setId(new String(GEN_ID + TYPE_COUNTER));
 			if (this.name != null) builder.setName(this.name);
 			else builder.setName(new String(GEN_NAME + TYPE_COUNTER));
