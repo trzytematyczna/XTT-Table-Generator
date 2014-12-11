@@ -6,17 +6,6 @@ import heart.xtt.Type;
 import java.util.LinkedList;
 import java.util.Random;
 
-/*
- * PYTANIA:
- * 
- * abbreviation ?
- * 
- * CALLBACK - do czego ?
- * 
-	private Long expirationTime; ---------- brak w builderze
- * 
- */
-
 public class AttributeConfigurator {
 
 	private static int ATTR_COUNTER = 0;
@@ -55,104 +44,154 @@ public class AttributeConfigurator {
 	private Double[] XTTClassParam;
 	
 	private String description;
-	private String abbreviation; 
-	
-	/**
-	 * A variable that contains a name of a Callback class
-	 * that should be triggered with a reflection mechanism
-	 * depending on the {@link #comm} value.
-	 */
-	private String callback;
-	
-	/**
-	 * Time in milliseconds indicating a period after which the value of the attribute 
-	 * cannot be considered valid anymore.
-	 */
-	private Long expirationTime;
+
 	/**
 	 * A field that contains a reference to a type defined as xtype in HMR. 
 	 * This field denotes the attribute's type.
 	 */
 	private Type type;
 	
+	private Double[] typeParam;
+
+//	UNUSED:
+//	private String abbreviation; 
+//	private String callback;
+//	private Long expirationTime;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getComm() {
+		return comm;
+	}
+	public void setComm(String comm) {
+		this.comm = comm;
+	}
+	public Double[] getCommParam() {
+		return commParam;
+	}
+	public void setCommParam(Double[] commParam) {
+		this.commParam = commParam;
+	}
+	public String getXTTClass() {
+		return XTTClass;
+	}
+	public void setXTTClass(String xTTClass) {
+		XTTClass = xTTClass;
+	}
+	public Double[] getXTTClassParam() {
+		return XTTClassParam;
+	}
+	public void setXTTClassParam(Double[] xTTClassParam) {
+		XTTClassParam = xTTClassParam;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
+	}
+	public Double[] getTypeParam() {
+		return typeParam;
+	}
+	public void setTypeParam(Double[] typeParam) {
+		this.typeParam = typeParam;
+	}
+
 	
 	public boolean validateConfiguration(){
 		if(this.comm == null && this.commParam == null) return false;
+		if(this.commParam.length!=5) return false;
 		if(this.comm != null && !(this.comm.equals(this.COMM_IN)|| this.comm.equals(this.COMM_OUT)|| this.comm.equals(this.COMM_INTER)||this.comm.equals(this.COMM_COMM) || this.comm.equals(this.COMM_UNKNOWN))) return false;
 		if(this.XTTClass == null && this.XTTClassParam == null) return false;
 		if(this.XTTClass != null && !(this.XTTClass.equals(this.CLASS_SIMPLE)||this.XTTClass.equals(this.CLASS_GENERAL)||this.XTTClass.equals(this.CLASS_UNKNOWN))) return false;
-		if(this.expirationTime != null ) return false;
-		if(this.type == null) return false;
+//		if(this.expirationTime != null ) return false;
+		if(this.type == null && this.typeParam == null) return false;
 		return true;
 	}
 	
 	
 	/*
-	 * private String id; done 
+	private String id; done 
 	private String name; done
 	private String comm; done ?
 	private String[] commParam; done ?
 	private String XTTClass; done
 	private String[] XTTClassParam; done
 	private String description; done
-	private String abbreviation;  ??
-	private String callback; ??
-	private Long expirationTime; ---------- brak w builderze
 	private Type type; done ?
 	 */
 	public Attribute generateAttribute(Random random, LinkedList<Type> types) throws Exception{
 		Attribute attribute = null;
 		if(this.validateConfiguration()){
-			Attribute.Builder builder = new Attribute.Builder();
-			if(this.id != null) builder.setId(this.id);
-			else builder.setId(new String(GEN_ID + ATTR_COUNTER));
-			if(this.name != null) builder.setName(this.name);
-			else builder.setName(new String(GEN_NAME + ATTR_COUNTER));
-			if (this.description != null) builder.setDescription(this.description);
-			else builder.setDescription(new String(GEN_DESC + ATTR_COUNTER));
-			if (this.type != null) builder.setType(this.type);
-			else {
-				Integer pickedType = random.nextInt();
-				builder.setType(types.get(pickedType));
-			}
-			if(this.comm != null) builder.setComm(this.comm);
-			else{
-				Double shot = random.nextDouble();
-				if (this.commParam[0] > shot) {
-					builder.setComm(COMM_IN);
-					this.comm = COMM_IN;
-				}
-				else if (this.commParam[0] + this.commParam[1] > shot) {
-					builder.setComm(COMM_OUT);
-					this.comm = COMM_OUT;
-				}
-				else if (this.commParam[0] + this.commParam[1] + this.commParam[2]> shot) {
-					builder.setComm(COMM_INTER);
-					this.comm = COMM_INTER;
-				}
-				else if (this.commParam[0] + this.commParam[1] + this.commParam[2] + this.commParam[3]> shot) {
-					builder.setComm(COMM_COMM);
-					this.comm = COMM_COMM;
-				}
+			//dlugosc typeParam zgadza sie z liczba typow w types.
+			if(this.typeParam.length == types.size()){
+				Attribute.Builder builder = new Attribute.Builder();
+				if(this.id != null) builder.setId(this.id);
+				else builder.setId(new String(GEN_ID + ATTR_COUNTER));
+				if(this.name != null) builder.setName(this.name);
+				else builder.setName(new String(GEN_NAME + ATTR_COUNTER));
+				if (this.description != null) builder.setDescription(this.description);
+				else builder.setDescription(new String(GEN_DESC + ATTR_COUNTER));
+				if (this.type != null) builder.setType(this.type);
 				else {
-					builder.setComm(COMM_UNKNOWN);
-					this.comm = COMM_UNKNOWN;
+					Integer pickedType = random.nextInt();
+					builder.setType(types.get(pickedType));
 				}
-			}
-			if(this.XTTClass != null) builder.setXTTClass(this.XTTClass);
-			else{
-				Double shot = random.nextDouble();
-				if (this.XTTClassParam[0] > shot) {
-					builder.setXTTClass(CLASS_SIMPLE);
-					this.XTTClass = CLASS_SIMPLE;
+				if(this.comm != null) builder.setComm(this.comm);
+				else{
+					Double shot = random.nextDouble();
+					if (this.commParam[0] > shot) {
+						builder.setComm(COMM_IN);
+						this.comm = COMM_IN;
+					}
+					else if (this.commParam[0] + this.commParam[1] > shot) {
+						builder.setComm(COMM_OUT);
+						this.comm = COMM_OUT;
+					}
+					else if (this.commParam[0] + this.commParam[1] + this.commParam[2]> shot) {
+						builder.setComm(COMM_INTER);
+						this.comm = COMM_INTER;
+					}
+					else if (this.commParam[0] + this.commParam[1] + this.commParam[2] + this.commParam[3]> shot) {
+						builder.setComm(COMM_COMM);
+						this.comm = COMM_COMM;
+					}
+					else {
+						builder.setComm(COMM_UNKNOWN);
+						this.comm = COMM_UNKNOWN;
+					}
 				}
-				else if (this.XTTClassParam[0] + this.XTTClassParam[1] > shot) {
-					builder.setXTTClass(CLASS_GENERAL);
-					this.XTTClass = CLASS_GENERAL;
-				}
-				else {
-					builder.setXTTClass(CLASS_UNKNOWN);
-					this.XTTClass = CLASS_UNKNOWN;
+				if(this.XTTClass != null) builder.setXTTClass(this.XTTClass);
+				else{
+					Double shot = random.nextDouble();
+					if (this.XTTClassParam[0] > shot) {
+						builder.setXTTClass(CLASS_SIMPLE);
+						this.XTTClass = CLASS_SIMPLE;
+					}
+					else if (this.XTTClassParam[0] + this.XTTClassParam[1] > shot) {
+						builder.setXTTClass(CLASS_GENERAL);
+						this.XTTClass = CLASS_GENERAL;
+					}
+					else {
+						builder.setXTTClass(CLASS_UNKNOWN);
+						this.XTTClass = CLASS_UNKNOWN;
+					}
 				}
 			}
 //			if(this.expirationTime != null) builder.setExpirationTime(this.expirationTime);
@@ -162,6 +201,8 @@ public class AttributeConfigurator {
 //			}
 
 		}
+		AttributeConfigurator.ATTR_COUNTER++;
+		this.attributes.add(attribute);
 		return attribute;
 	}
 	
