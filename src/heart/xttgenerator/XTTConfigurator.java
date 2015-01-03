@@ -21,6 +21,7 @@ public class XTTConfigurator {
 	private int[] attributesParam;
 	
 	private AttributeConfigurator attributeConfigurator;
+	private TableConfigurator tableConfigurator;
 	//private SetValueConfigurator setValueConfigurator;
 	private TypeConfigurator typeConfigurator;
 	private ValueConfigurator valueConfigurator;
@@ -35,13 +36,8 @@ public class XTTConfigurator {
 	
 	public XTTModel generateXTTModel(Random random) throws Exception {
 		XTTModel xttModel = new XTTModel(4); //TODO add new source to XTTModel, 4 in meantime
-		int number = random.nextInt(this.tablesParam[1] - this.tablesParam[0]) + this.tablesParam[0];
-		LinkedList<Table> tables = new LinkedList<Table>();
-		for (int i = 0; i < number; i++) {
-			//tables.add(this.tableConfigurator.generateTable(random)); TODO
-		}
-		xttModel.setTables(tables);
-		number = random.nextInt(this.typesParam[1] - this.typesParam[0]) + this.typesParam[0];
+		if (this.version != null) xttModel.setVersion(version);
+		int number = random.nextInt(this.typesParam[1] - this.typesParam[0]) + this.typesParam[0];
 		LinkedList<Type> types = new LinkedList<Type>();
 		for (int i = 0; i < number; i++) {
 			types.add(this.typeConfigurator.generateType(random));
@@ -51,6 +47,12 @@ public class XTTConfigurator {
 		for (int i = 0; i < number; i++) {
 			attributes.add(this.attributeConfigurator.generateAttribute(random, types));
 		}
+		number = random.nextInt(this.tablesParam[1] - this.tablesParam[0]) + this.tablesParam[0];
+		LinkedList<Table> tables = new LinkedList<Table>();
+		for (int i = 0; i < number; i++) {
+			tables.add(this.tableConfigurator.generateTable(random, attributes));
+		}
+		xttModel.setTables(tables);
 		xttModel.setAttributes(attributes);
 		return xttModel;
 	}
