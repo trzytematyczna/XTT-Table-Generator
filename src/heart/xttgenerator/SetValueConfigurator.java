@@ -3,6 +3,8 @@ package heart.xttgenerator;
 import java.util.LinkedList;
 import java.util.Random;
 
+import heart.alsvfd.Any;
+import heart.alsvfd.Range;
 import heart.alsvfd.SetValue;
 import heart.alsvfd.SimpleNumeric;
 import heart.alsvfd.SimpleSymbolic;
@@ -18,18 +20,24 @@ public class SetValueConfigurator {
 	
 	private LinkedList<Value> values;
 	private double[] valuesParam;
-	private double[] valuesSetParam;
-	private double[] rangeSimpleParam;
+	private double valuesIsRangeParam;
+	private double[] rangeParam;
 	private int[] valuesLengthParam;
-	private String baseParam;
-	
-	public boolean validateConfiguration() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 	
 	public boolean validateConfiguration(String base) {
-		// TODO Auto-generated method stub
+		if (this.values == null) {
+			if (base == Type.BASE_NUMERIC) {
+				if (this.valuesParam == null || this.valuesIsRangeParam < 0 || this.valuesIsRangeParam > 1) return false;
+				if (this.valuesIsRangeParam == 0 && this.valuesLengthParam == null) return false;
+				if (this.valuesIsRangeParam == 1 && this.rangeParam == null) return false;
+				if (this.valuesLengthParam == null || this.rangeParam == null) return false;
+				if (this.rangeParam[0] > this.rangeParam[1]) return false;
+				if (this.rangeParam[0] < 0) return false;
+			}
+			if (this.valuesLengthParam == null) return false;
+			if (this.valuesLengthParam[0] > this.valuesLengthParam[1]) return false;
+			if (this.valuesLengthParam[0] < 0) return false;
+		}
 		return true;
 	}
 	
@@ -40,28 +48,28 @@ public class SetValueConfigurator {
 				return new SetValue(values);
 			}
 			else if (base.equals(Type.BASE_NUMERIC)) {
-				//TODO what about Range
 				if (valuesLengthParam != null) {
-					int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]) + this.valuesLengthParam[0];
+					int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]);
 					LinkedList<Value> values = new LinkedList<Value>();
 					for (int i = 0; i < number; i++) {
-						values.add(new SimpleNumeric());
+						double shot = random.nextDouble();
+						if (shot < this.valuesIsRangeParam) {
+							values.add(new Range(new SimpleNumeric(this.valuesParam[0]), new SimpleNumeric(this.valuesParam[1])));
+						}
+						double value = random.nextDouble() * (this.valuesParam[1] - this.valuesParam[0]) + this.valuesParam[0];
+						values.add(new SimpleNumeric(value, random.nextFloat()));
 					}
 					return new SetValue(values);
 				}
-				
 			}
 			else if (base.equals(Type.BASE_SYMBOLIC)) {
-				int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]) + this.valuesLengthParam[0];
+				int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]);
 				LinkedList<Value> values = new LinkedList<Value>();
 				for (int i = 0; i < number; i++) {
-					values.add(new SimpleSymbolic(SetValueConfigurator.GEN_SYMBOLIC_VALUE + i, i)); //TODO make sure what order does
+					values.add(new SimpleSymbolic(SetValueConfigurator.GEN_SYMBOLIC_VALUE + i, i));
 				}
 				return new SetValue(values);
-			}
-			else {
-				
-			}
+			}// TODO is it all ??
 		}
 		else {
 			throw new Exception(); //TODO exception
