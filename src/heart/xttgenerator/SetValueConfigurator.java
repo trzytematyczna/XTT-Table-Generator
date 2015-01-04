@@ -45,7 +45,7 @@ public class SetValueConfigurator {
 		SetValue setValue = null;
 		if (this.validateConfiguration(base)) {
 			if (this.values != null){
-				return new SetValue(values);
+				setValue = new SetValue(values);
 			}
 			else if (base.equals(Type.BASE_NUMERIC)) {
 				if (valuesLengthParam != null) {
@@ -59,7 +59,7 @@ public class SetValueConfigurator {
 						double value = random.nextDouble() * (this.valuesParam[1] - this.valuesParam[0]) + this.valuesParam[0];
 						values.add(new SimpleNumeric(value, random.nextFloat()));
 					}
-					return new SetValue(values);
+					setValue = new SetValue(values);
 				}
 			}
 			else if (base.equals(Type.BASE_SYMBOLIC)) {
@@ -68,7 +68,7 @@ public class SetValueConfigurator {
 				for (int i = 0; i < number; i++) {
 					values.add(new SimpleSymbolic(SetValueConfigurator.GEN_SYMBOLIC_VALUE + i, i));
 				}
-				return new SetValue(values);
+				setValue = new SetValue(values);
 			}// TODO is it all ??
 		}
 		else {
