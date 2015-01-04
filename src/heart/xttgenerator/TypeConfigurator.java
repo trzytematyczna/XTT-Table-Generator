@@ -144,7 +144,9 @@ public class TypeConfigurator {
 		if (this.precision == null && this.precisionParam == null) return false;
 		if (this.precision == null && this.precisionParam != null && this.precisionParam < 0) return false;
 		if (this.domain == null && this.domainParam == null) return false;
-		if (this.domain == null && this.domainParam.validateConfiguration() == false) return false;
+		if (this.domain == null && this.base != null && this.domainParam.validateConfiguration(this.base) == false) return false;
+		if (this.domain == null && this.baseParam == null && this.domainParam.validateConfiguration(Type.BASE_NUMERIC) == false) return false;
+		if (this.domain == null && this.baseParam == null && this.domainParam.validateConfiguration(Type.BASE_SYMBOLIC) == false) return false;
 		return true;
 	}
 	
