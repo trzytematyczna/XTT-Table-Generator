@@ -19,46 +19,49 @@ import org.codehaus.jackson.JsonGenerationException;
 
 public class TypeConfiguratorTest {
 
+	private static final String CONFIGURATION = 
+		"{"
+		+ "\"id\":null,"
+		+ "\"name\":null,"
+		+ "\"length\":null,"
+		+ "\"lengthParam\":[2,4],"
+		+ "\"base\":null,"
+		+ "\"baseParam\":[0.5, 0.4, 0.1],"
+		+ "\"ordered\":null,"
+		+ "\"orderedParam\":[0.5, 0.5],"
+		+ "\"description\":null,"
+		+ "\"precision\":null,"
+		+ "\"precisionParam\":4,"
+		+ "\"domain\":null,"
+		+ "\"domainParam\":"
+			+ "{"
+			+ "\"values\":null,"
+			+ "\"valuesParam\":[10,20],"
+			+ "\"valuesIsRangeParam\":0.5,"
+			+ "\"valuesLengthParam\":[3,5]"
+			+ "}"
+		+ "}";
+	
 	abstract class MixIn {
 		@JsonIgnore abstract boolean isEmpty();
 	}
 	
-	@Test
-	public void test() throws Exception {
+	public void printConfiguration() throws JsonGenerationException, JsonMappingException, IOException {
 		TypeConfigurator typeConfigurator = new TypeConfigurator();
-		typeConfigurator.setBaseParam(new Double[]{0.3, 0.6, 0.9});
-		typeConfigurator.setDescription("description1");
-		typeConfigurator.setLengthParam(new Integer[]{3, 5});
-		typeConfigurator.setOrdered(Type.ORDERED_NO);
-		typeConfigurator.setPrecision(4);
-		typeConfigurator.setDomainParam(new SetValueConfigurator());
-		
 		ObjectMapper mapper = new ObjectMapper();
 //		mapper.getSerializationConfig().addMixInAnnotations(SetValue.class, MixIn.class);
 		mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
-		String typeConfiguratorString = mapper.writeValueAsString(typeConfigurator);
-		
-
-		File file = new File("TypeConfiguration.txt");
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-		FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(typeConfiguratorString);
-		bw.close();
-		
-		Type type = typeConfigurator.generateType(new Random());
-//		String typeString = mapper.writeValueAsString(type);
-//		
-//		file = new File("GeneratedType.txt");
-//		if (!file.exists()) {
-//			file.createNewFile();
-//		}
-//		fw = new FileWriter(file.getAbsoluteFile());
-//		bw = new BufferedWriter(fw);
-//		bw.write(typeString);
-//		bw.close();
+		System.out.println(mapper.writeValueAsString(typeConfigurator));
+	}
+	
+	@Test
+	public void test() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+//		mapper.getSerializationConfig().addMixInAnnotations(SetValue.class, MixIn.class);
+		mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
+		TypeConfigurator typeConfigurator = mapper.readValue(CONFIGURATION, TypeConfigurator.class);
+		Random random = new Random();
+		Type type1 = typeConfigurator.generateType(random);
 	}
 
 }
