@@ -78,9 +78,55 @@ public class SetValueConfigurator {
 		SetValueConfigurator.setValues.add(setValue);
 		return setValue;
 	}
-	
-	public SetValue generateSetValue(Random random) {
-		return new SetValue();
+
+	public static LinkedList<SetValue> getSetValues() {
+		return setValues;
 	}
+
+	public static void setSetValues(LinkedList<SetValue> setValues) {
+		SetValueConfigurator.setValues = setValues;
+	}
+
+	public LinkedList<Value> getValues() {
+		return values;
+	}
+
+	public void setValues(LinkedList<Value> values) {
+		this.values = values;
+	}
+
+	public double[] getValuesParam() {
+		return valuesParam;
+	}
+
+	public void setValuesParam(double[] valuesParam) {
+		this.valuesParam = valuesParam;
+	}
+
+	public double getValuesIsRangeParam() {
+		return valuesIsRangeParam;
+	}
+
+	public void setValuesIsRangeParam(double valuesIsRangeParam) {
+		this.valuesIsRangeParam = valuesIsRangeParam;
+	}
+
+	public double[] getRangeParam() {
+		return rangeParam;
+	}
+
+	public void setRangeParam(double[] rangeParam) {
+		this.rangeParam = rangeParam;
+	}
+
+	public int[] getValuesLengthParam() {
+		return valuesLengthParam;
+	}
+
+	public void setValuesLengthParam(int[] valuesLengthParam) {
+		this.valuesLengthParam = valuesLengthParam;
+	}
+	
+	
 	
 }
