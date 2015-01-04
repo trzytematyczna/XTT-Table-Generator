@@ -17,10 +17,9 @@ public class SetValueConfiguratorTest {
 	private static final String CONFIGURATION = 
 			"{"
 			+ "\"values\":null,"
-			+ "\"valuesParam\":null,"
-			+ "\"valuesIsRangeParam\":0.0,"
-			+ "\"rangeParam\":null,"
-			+ "\"valuesLengthParam\":null"
+			+ "\"valuesParam\":[10,20],"
+			+ "\"valuesIsRangeParam\":0.5,"
+			+ "\"valuesLengthParam\":[3,5]"
 			+ "}";
 	
 	public void printConfiguration() throws JsonGenerationException, JsonMappingException, IOException {

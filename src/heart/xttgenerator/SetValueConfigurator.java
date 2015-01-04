@@ -21,7 +21,6 @@ public class SetValueConfigurator {
 	private LinkedList<Value> values;
 	private double[] valuesParam;
 	private double valuesIsRangeParam;
-	private double[] rangeParam;
 	private int[] valuesLengthParam;
 	
 	public boolean validateConfiguration(String base) {
@@ -29,10 +28,10 @@ public class SetValueConfigurator {
 			if (base == Type.BASE_NUMERIC) {
 				if (this.valuesParam == null || this.valuesIsRangeParam < 0 || this.valuesIsRangeParam > 1) return false;
 				if (this.valuesIsRangeParam == 0 && this.valuesLengthParam == null) return false;
-				if (this.valuesIsRangeParam == 1 && this.rangeParam == null) return false;
-				if (this.valuesLengthParam == null || this.rangeParam == null) return false;
-				if (this.rangeParam[0] > this.rangeParam[1]) return false;
-				if (this.rangeParam[0] < 0) return false;
+				if (this.valuesIsRangeParam == 1 && this.valuesParam == null) return false;
+				if (this.valuesLengthParam == null || this.valuesParam == null) return false;
+				if (this.valuesParam[0] > this.valuesParam[1]) return false;
+				if (this.valuesParam[0] < 0) return false;
 			}
 			if (this.valuesLengthParam == null) return false;
 			if (this.valuesLengthParam[0] > this.valuesLengthParam[1]) return false;
@@ -49,7 +48,7 @@ public class SetValueConfigurator {
 			}
 			else if (base.equals(Type.BASE_NUMERIC)) {
 				if (valuesLengthParam != null) {
-					int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]);
+					int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]) + this.valuesLengthParam[0];
 					LinkedList<Value> values = new LinkedList<Value>();
 					for (int i = 0; i < number; i++) {
 						double shot = random.nextDouble();
@@ -63,7 +62,7 @@ public class SetValueConfigurator {
 				}
 			}
 			else if (base.equals(Type.BASE_SYMBOLIC)) {
-				int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]);
+				int number = random.nextInt(this.valuesLengthParam[1] - this.valuesLengthParam[0]) + this.valuesLengthParam[0];
 				LinkedList<Value> values = new LinkedList<Value>();
 				for (int i = 0; i < number; i++) {
 					values.add(new SimpleSymbolic(SetValueConfigurator.GEN_SYMBOLIC_VALUE + i, i));
@@ -109,14 +108,6 @@ public class SetValueConfigurator {
 
 	public void setValuesIsRangeParam(double valuesIsRangeParam) {
 		this.valuesIsRangeParam = valuesIsRangeParam;
-	}
-
-	public double[] getRangeParam() {
-		return rangeParam;
-	}
-
-	public void setRangeParam(double[] rangeParam) {
-		this.rangeParam = rangeParam;
 	}
 
 	public int[] getValuesLengthParam() {
