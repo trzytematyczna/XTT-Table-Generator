@@ -24,7 +24,7 @@ public class TableConfigurator {
 	private double[] precConcParam;
 	private int[] attributesNumberParam;
 	
-//	private LinkedList<Rule> rules;
+//	private LinkedList<Rule> rules; TODO
 //	private RuleConfigurator rulesParam;
 	
 	public TableConfigurator() {
