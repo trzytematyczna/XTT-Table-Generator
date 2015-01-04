@@ -39,29 +39,76 @@ public class TableConfigurator {
 	}
 	
 
-	public Table generateTable(Random random, LinkedList<Attribute> attributes) {
-		Table table = new Table();
-		if (this.id == null) table.setId(GEN_ID + TableConfigurator.TABLE_COUNTER);
-		else table.setId(this.id);
-		if (this.name == null) table.setName(GEN_NAME + TableConfigurator.TABLE_COUNTER);
-		else table.setName(this.name);
-		if (this.description == null) table.setDescription(GEN_DESC + TableConfigurator.TABLE_COUNTER);
-		else table.setDescription(this.description);
-		LinkedList<Attribute> precondition = new LinkedList<Attribute>();
-		precondition.add(attributes.get(random.nextInt(attributes.size())));
-		LinkedList<Attribute> conclusion = new LinkedList<Attribute>();
-		conclusion.add(attributes.get(random.nextInt(attributes.size())));
-		int number = random.nextInt(this.attributesNumberParam[1] - this.attributesNumberParam[0]) + this.attributesNumberParam[0];
-		for (int i=0; i < number; i++) {
-			double shot = random.nextDouble();
-			if (shot < this.precConcParam[0]) precondition.add(attributes.get(random.nextInt(attributes.size())));
-			else conclusion.add(attributes.get(random.nextInt(attributes.size())));
+	public Table generateTable(Random random, LinkedList<Attribute> attributes) throws Exception {
+		if (validateConfiguration(attributes) == true) {
+			Table table = new Table();
+			if (this.id == null) table.setId(GEN_ID + TableConfigurator.TABLE_COUNTER);
+			else table.setId(this.id);
+			if (this.name == null) table.setName(GEN_NAME + TableConfigurator.TABLE_COUNTER);
+			else table.setName(this.name);
+			if (this.description == null) table.setDescription(GEN_DESC + TableConfigurator.TABLE_COUNTER);
+			else table.setDescription(this.description);
+			LinkedList<Attribute> precondition = new LinkedList<Attribute>();
+			precondition.add(attributes.get(random.nextInt(attributes.size())));
+			LinkedList<Attribute> conclusion = new LinkedList<Attribute>();
+			conclusion.add(attributes.get(random.nextInt(attributes.size())));
+			int number = random.nextInt(this.attributesNumberParam[1] - this.attributesNumberParam[0]) + this.attributesNumberParam[0];
+			for (int i=0; i < number; i++) {
+				double shot = random.nextDouble();
+				if (shot < this.precConcParam[0]) precondition.add(attributes.get(random.nextInt(attributes.size())));
+				else conclusion.add(attributes.get(random.nextInt(attributes.size())));
+			}
+			table.setConclusion(precondition);
+			table.setPrecondition(conclusion);
+			TableConfigurator.TABLE_COUNTER++;
+			TableConfigurator.tables.add(table);
+			return table;
 		}
-		table.setConclusion(precondition);
-		table.setPrecondition(conclusion);
-		TableConfigurator.TABLE_COUNTER++;
-		TableConfigurator.tables.add(table);
-		return table;
+		else {
+			throw new Exception();
+		}
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public double[] getPrecConcParam() {
+		return precConcParam;
+	}
+
+	public void setPrecConcParam(double[] precConcParam) {
+		this.precConcParam = precConcParam;
+	}
+
+	public int[] getAttributesNumberParam() {
+		return attributesNumberParam;
+	}
+
+	public void setAttributesNumberParam(int[] attributesNumberParam) {
+		this.attributesNumberParam = attributesNumberParam;
+	}
+	
+	
 	
 }
