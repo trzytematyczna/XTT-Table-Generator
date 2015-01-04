@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import heart.alsvfd.Any;
+import heart.alsvfd.Null;
 import heart.alsvfd.Range;
 import heart.alsvfd.SetValue;
 import heart.alsvfd.SimpleNumeric;
@@ -21,6 +22,7 @@ public class SetValueConfigurator {
 	private LinkedList<Value> values;
 	private double[] valuesParam;
 	private double valuesIsRangeParam;
+	private double[] anyNullParam;
 	private int[] valuesLengthParam;
 	
 	public boolean validateConfiguration(String base) {
@@ -36,6 +38,10 @@ public class SetValueConfigurator {
 			if (this.valuesLengthParam == null) return false;
 			if (this.valuesLengthParam[0] > this.valuesLengthParam[1]) return false;
 			if (this.valuesLengthParam[0] < 0) return false;
+			if (this.anyNullParam == null || this.anyNullParam[0] < 0 || this.anyNullParam[0] > 1 || 
+				this.anyNullParam[1] < 0 || this.anyNullParam[1] > 1 || this.anyNullParam[0] + this.anyNullParam[1] > 1) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -68,14 +74,25 @@ public class SetValueConfigurator {
 					values.add(new SimpleSymbolic(SetValueConfigurator.GEN_SYMBOLIC_VALUE + i, i));
 				}
 				setValue = new SetValue(values);
-			}// TODO is it all ??
+			}
+			else {
+				LinkedList<Value> values = new LinkedList<Value>();
+				double shot = random.nextDouble() * (this.anyNullParam[0] + this.anyNullParam[1]);
+				if (shot < this.anyNullParam[0]) {
+					values.add(new Any());
+				}
+				else {
+					values.add(new Null());
+				}
+				setValue = new SetValue(values);
+			}
+			SetValueConfigurator.SETVALUE_COUNTER++;
+			SetValueConfigurator.setValues.add(setValue);
+			return setValue;
 		}
 		else {
 			throw new Exception(); //TODO exception
 		}
-		SetValueConfigurator.SETVALUE_COUNTER++;
-		SetValueConfigurator.setValues.add(setValue);
-		return setValue;
 	}
 
 	public static LinkedList<SetValue> getSetValues() {
@@ -116,6 +133,14 @@ public class SetValueConfigurator {
 
 	public void setValuesLengthParam(int[] valuesLengthParam) {
 		this.valuesLengthParam = valuesLengthParam;
+	}
+
+	public double[] getAnyNullParam() {
+		return anyNullParam;
+	}
+
+	public void setAnyNullParam(double[] anyNullParam) {
+		this.anyNullParam = anyNullParam;
 	}
 	
 	
