@@ -72,6 +72,7 @@ public class TableConfigurator {
 					generatedRules.add(this.rulesParam.generateRule());
 				}
 				table.setRules(generatedRules);
+				//TODO adding Rules to ruleLinks in Rule
 			}
 			TableConfigurator.TABLE_COUNTER++;
 			TableConfigurator.tables.add(table);
