@@ -34,5 +34,11 @@ public class RuleConfigurator {
 	
 
 	protected LinkedList<String> actions;
+
+
+	public Rule generateRule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
