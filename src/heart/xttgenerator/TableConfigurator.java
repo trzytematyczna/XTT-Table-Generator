@@ -24,8 +24,9 @@ public class TableConfigurator {
 	private double[] precConcParam;
 	private int[] attributesNumberParam;
 	
-//	private LinkedList<Rule> rules; TODO
-//	private RuleConfigurator rulesParam;
+	private LinkedList<Rule> rules;
+	private RuleConfigurator rulesParam;
+	private int[] rulesNumberParam;
 	
 	public TableConfigurator() {
 		super();
@@ -35,6 +36,9 @@ public class TableConfigurator {
 		if (attributes.size() < 2) return false;
 		if (this.precConcParam.length != 2) return false;
 		if (this.precConcParam[0] + this.precConcParam[1] != 1) return false;
+		if (this.rules == null && this.rulesParam == null) return false;
+		if (this.rules == null && this.rulesNumberParam == null) return false;
+		if (this.rulesNumberParam[0] < 0 || this.rulesNumberParam[0] > this.rulesNumberParam[1]) return false;
 		return true;
 	}
 	
@@ -60,6 +64,16 @@ public class TableConfigurator {
 			}
 			table.setConclusion(precondition);
 			table.setPrecondition(conclusion);
+			if (this.rules != null) table.setRules(this.rules);
+			else {
+				LinkedList<Rule> generatedRules = new LinkedList<Rule>();
+				number = random.nextInt(this.rulesNumberParam[1] - this.rulesNumberParam[0]) + this.rulesNumberParam[0];
+				for (int i = 0; i < number; i++) {
+					generatedRules.add(this.rulesParam.generateRule());
+				}
+				table.setRules(generatedRules);
+				//TODO adding Rules to ruleLinks in Rule
+			}
 			TableConfigurator.TABLE_COUNTER++;
 			TableConfigurator.tables.add(table);
 			return table;
@@ -107,6 +121,22 @@ public class TableConfigurator {
 
 	public void setAttributesNumberParam(int[] attributesNumberParam) {
 		this.attributesNumberParam = attributesNumberParam;
+	}
+
+	public LinkedList<Rule> getRules() {
+		return rules;
+	}
+
+	public void setRules(LinkedList<Rule> rules) {
+		this.rules = rules;
+	}
+
+	public RuleConfigurator getRulesParam() {
+		return rulesParam;
+	}
+
+	public void setRulesParam(RuleConfigurator rulesParam) {
+		this.rulesParam = rulesParam;
 	}
 	
 	

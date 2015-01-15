@@ -38,6 +38,7 @@ public class TypeConfiguratorTest {
 			+ "\"values\":null,"
 			+ "\"valuesParam\":[10,20],"
 			+ "\"valuesIsRangeParam\":0.5,"
+			+ "\"anyNullParam\":[0.1,0.1],"
 			+ "\"valuesLengthParam\":[3,5]"
 			+ "}"
 		+ "}";
