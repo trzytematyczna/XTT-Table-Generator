@@ -16,6 +16,28 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 public class AttributeConfiguratorTest {
+	private static final String CONFIGURATION = 
+			"{"
+			+ "\"id\":null,"
+			+ "\"name\":null,"
+			+ "\"length\":null,"
+			+ "\"lengthParam\":[2,4],"
+			+ "\"base\":null,"
+			+ "\"baseParam\":[0.5, 0.4, 0.1],"
+			+ "\"ordered\":null,"
+			+ "\"orderedParam\":[0.5, 0.5],"
+			+ "\"description\":null,"
+			+ "\"precision\":null,"
+			+ "\"precisionParam\":4,"
+			+ "\"domain\":null,"
+			+ "\"domainParam\":"
+				+ "{"
+				+ "\"values\":null,"
+				+ "\"valuesParam\":[10,20],"
+				+ "\"valuesIsRangeParam\":0.5,"
+				+ "\"valuesLengthParam\":[3,5]"
+				+ "}"
+			+ "}";
 	@Test
 	public void test() throws Exception {
 		AttributeConfigurator attributeConfigurator = new AttributeConfigurator();
@@ -39,7 +61,14 @@ public class AttributeConfiguratorTest {
 		bw.write(attributeConfiguratorString);
 		bw.close();
 		
-		LinkedList<Type> types = null;
+		TypeConfigurator typeConfigurator = mapper.readValue(CONFIGURATION, TypeConfigurator.class);
+		Random random = new Random();
+
+		LinkedList<Type> types = new LinkedList<Type>() ;
+		for (int i=0; i<5; i++){
+			Type type1 = typeConfigurator.generateType(random);
+			types.add(type1);
+		}
 		Attribute attr = attributeConfigurator.generateAttribute(new Random(), types);
 //		String typeString = mapper.writeValueAsString(type);
 //		
