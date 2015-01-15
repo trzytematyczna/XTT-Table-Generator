@@ -150,7 +150,7 @@ public class AttributeConfigurator {
 				else builder.setDescription(new String(GEN_DESC + ATTR_COUNTER));
 				if (this.type != null) builder.setType(this.type);
 				else {
-					Integer pickedType = random.nextInt();
+					Integer pickedType = random.nextInt(types.size()-1);
 					builder.setType(types.get(pickedType));
 				}
 				if(this.comm != null) builder.setComm(this.comm);
@@ -193,13 +193,16 @@ public class AttributeConfigurator {
 						this.XTTClass = CLASS_UNKNOWN;
 					}
 				}
+				attribute = builder.build();
 			}
 //			if(this.expirationTime != null) builder.setExpirationTime(this.expirationTime);
 //			else{
 //				Long pickedExpTime = random.nextLong();
 //				builder.setExpirationTime(pickedExpTime);
 //			}
-
+		}
+		else{
+			
 		}
 		AttributeConfigurator.ATTR_COUNTER++;
 		this.attributes.add(attribute);

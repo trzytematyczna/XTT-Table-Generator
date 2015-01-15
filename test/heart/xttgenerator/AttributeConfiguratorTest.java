@@ -35,6 +35,7 @@ public class AttributeConfiguratorTest {
 				+ "\"values\":null,"
 				+ "\"valuesParam\":[10,20],"
 				+ "\"valuesIsRangeParam\":0.5,"
+				+ "\"anyNullParam\":[0.1,0.1],"
 				+ "\"valuesLengthParam\":[3,5]"
 				+ "}"
 			+ "}";
@@ -65,11 +66,12 @@ public class AttributeConfiguratorTest {
 		Random random = new Random();
 
 		LinkedList<Type> types = new LinkedList<Type>() ;
-		for (int i=0; i<5; i++){
+		for (int i=0; i<4; i++){
 			Type type1 = typeConfigurator.generateType(random);
 			types.add(type1);
 		}
 		Attribute attr = attributeConfigurator.generateAttribute(new Random(), types);
+		int i=0;
 //		String typeString = mapper.writeValueAsString(type);
 //		
 //		file = new File("GeneratedType.txt");
