@@ -2,11 +2,15 @@ package heart.xttgenerator;
 
 import heart.Action;
 import heart.alsvfd.Formulae;
+import heart.alsvfd.Formulae.Builder;
+import heart.xtt.Attribute;
 import heart.xtt.Decision;
 import heart.xtt.Rule;
+import heart.xtt.Rule.Builder.IncompleteRuleId;
 import heart.xtt.Table;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class RuleConfigurator {
 
@@ -22,25 +26,60 @@ public class RuleConfigurator {
 //	private float certaintyFactor;
 //	private LinkedList<Rule> ruleLinks; TODO
 //	private LinkedList<Table> tabLinks; TODO
-	private LinkedList<Formulae> conditions;
-	private LinkedList<Decision> decisions;
+	private LinkedList<Formulae.Builder> conditions;
+	private LinkedList<Decision.Builder> decisions;
 	private LinkedList<String> actions;
-
-	public boolean validate() {
+	private Integer[] formulaeParam;
+	private Integer[] decisionParam;
+//	private FormulaeConfigurator formulaeConf;
+//	private DecisionConfigurator decisionConf;
+	
+	public boolean validateConfiguration() {
+		if(this.conditions.isEmpty()) return false;
+		if(this.decisions.isEmpty()) return false;
+		if(this.formulaeParam == null || this.formulaeParam.length != 2 || this.formulaeParam[0]<=0 || this.formulaeParam[1] <= 0) return false;
+		if(this.decisionParam == null || this.decisionParam.length != 2 || this.decisionParam[0]<=0 || this.decisionParam[1] <= 0) return false;
 		
 		return true;
 	}
 	
-	public Rule generateRule() {
+	public Rule generateRule(Random random, LinkedList<Attribute> precondition, LinkedList<Attribute> conclusion) {
 		Rule rule = new Rule();
-		if (this.id != null) rule.setId(this.id);
-		else rule.setId(RuleConfigurator.GEN_ID + RuleConfigurator.RULE_COUNTER);
-		if (this.schemeName != null) rule.setSchemeName(this.schemeName);
-		else rule.setSchemeName(RuleConfigurator.GEN_SCHEMENAME);
-		rule.setOrderNumber(RuleConfigurator.RULE_COUNTER);
-		//TODO
-		RuleConfigurator.RULE_COUNTER++;
-		RuleConfigurator.rules.add(rule);
+		if(this.validateConfiguration()){
+			Rule.Builder builder = new Rule.Builder();
+//			Formulae f = new Formulae();
+//			f.setAttribute(at);
+//			f.setOp(op);
+//			f.setValue(v);
+			IncompleteRuleId ri = new IncompleteRuleId();
+			if (this.schemeName != null) {
+				rule.setSchemeName(this.schemeName);
+				ri.schemeName=this.schemeName;
+			}
+			else {
+				rule.setSchemeName(RuleConfigurator.GEN_SCHEMENAME);
+				ri.schemeName=RuleConfigurator.GEN_SCHEMENAME;
+			}
+			ri.orderNumber = RuleConfigurator.RULE_COUNTER;
+//			if (this.id != null) builder.setRuleId();
+//			else rule.setId(RuleConfigurator.GEN_ID + RuleConfigurator.RULE_COUNTER);
+			builder.setRuleId(ri);
+			Integer form = random.nextInt(this.formulaeParam[1] - this.formulaeParam[0]) + this.formulaeParam[0];
+			for(int i=0; i<form; i++){
+//				conditions.add()
+//				conditions.add(this.formulaeConf.generateFormulae(random, precondition));
+			}
+			builder.setConditions(this.conditions);
+			Integer dec = random.nextInt(this.decisionParam[1] - this.decisionParam[0]) + this.decisionParam[0];
+			for(int i=0; i<dec; i++){
+//				decisions.add(this.decisionConf.generateDecision(random, conclusion));				
+			}
+
+			rule.setOrderNumber(RuleConfigurator.RULE_COUNTER);
+			//TODO
+			RuleConfigurator.RULE_COUNTER++;
+			RuleConfigurator.rules.add(rule);
+		}
 		return rule;
 	}
 
@@ -68,19 +107,19 @@ public class RuleConfigurator {
 		this.schemeName = schemeName;
 	}
 
-	public LinkedList<Formulae> getConditions() {
+	public LinkedList<Formulae.Builder> getConditions() {
 		return conditions;
 	}
 
-	public void setConditions(LinkedList<Formulae> conditions) {
+	public void setConditions(LinkedList<Formulae.Builder> conditions) {
 		this.conditions = conditions;
 	}
 
-	public LinkedList<Decision> getDecisions() {
+	public LinkedList<Decision.Builder> getDecisions() {
 		return decisions;
 	}
 
-	public void setDecisions(LinkedList<Decision> decisions) {
+	public void setDecisions(LinkedList<Decision.Builder> decisions) {
 		this.decisions = decisions;
 	}
 
