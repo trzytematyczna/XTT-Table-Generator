@@ -13,20 +13,19 @@ import java.util.Random;
 public class XTTConfigurator {
 
 	private String version;
+	
 	private LinkedList<Table> tables;
 	private int[] tablesParam;
+	private TableConfigurator tableConfigurator;
+	
 	private LinkedList<Type> types;
 	private int[] typesParam;
+	private TypeConfigurator typeConfigurator;
+	
 	private LinkedList<Attribute> attributes;
 	private int[] attributesParam;
-	
 	private AttributeConfigurator attributeConfigurator;
-	private TableConfigurator tableConfigurator;
-	//private SetValueConfigurator setValueConfigurator;
-	private TypeConfigurator typeConfigurator;
-	private ValueConfigurator valueConfigurator;
-	//TODO adding next generators to overall configuration object and json file
-	
+		
 	public boolean validateConfiguration(){
 		if (this.tables == null && ((this.tablesParam[0] > this.tablesParam[1] || this.tablesParam[1] < 0) || true)) return false; //TODO tableConfigurator
 		if (this.types == null && ((this.typesParam[0] > this.typesParam[1] || this.typesParam[1] < 0) || this.typeConfigurator == null)) return false;
@@ -55,6 +54,86 @@ public class XTTConfigurator {
 		xttModel.setTables(tables);
 		xttModel.setAttributes(attributes);
 		return xttModel;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public LinkedList<Table> getTables() {
+		return tables;
+	}
+
+	public void setTables(LinkedList<Table> tables) {
+		this.tables = tables;
+	}
+
+	public int[] getTablesParam() {
+		return tablesParam;
+	}
+
+	public void setTablesParam(int[] tablesParam) {
+		this.tablesParam = tablesParam;
+	}
+
+	public TableConfigurator getTableConfigurator() {
+		return tableConfigurator;
+	}
+
+	public void setTableConfigurator(TableConfigurator tableConfigurator) {
+		this.tableConfigurator = tableConfigurator;
+	}
+
+	public LinkedList<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(LinkedList<Type> types) {
+		this.types = types;
+	}
+
+	public int[] getTypesParam() {
+		return typesParam;
+	}
+
+	public void setTypesParam(int[] typesParam) {
+		this.typesParam = typesParam;
+	}
+
+	public TypeConfigurator getTypeConfigurator() {
+		return typeConfigurator;
+	}
+
+	public void setTypeConfigurator(TypeConfigurator typeConfigurator) {
+		this.typeConfigurator = typeConfigurator;
+	}
+
+	public LinkedList<Attribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(LinkedList<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+
+	public int[] getAttributesParam() {
+		return attributesParam;
+	}
+
+	public void setAttributesParam(int[] attributesParam) {
+		this.attributesParam = attributesParam;
+	}
+
+	public AttributeConfigurator getAttributeConfigurator() {
+		return attributeConfigurator;
+	}
+
+	public void setAttributeConfigurator(AttributeConfigurator attributeConfigurator) {
+		this.attributeConfigurator = attributeConfigurator;
 	}
 	
 }
