@@ -2,6 +2,7 @@ package heart.xttgenerator;
 
 import static org.junit.Assert.*;
 import heart.xtt.Attribute;
+import heart.xtt.Rule;
 import heart.xtt.Table;
 
 import java.io.IOException;
@@ -21,7 +22,10 @@ public class TableConfiguratorTest {
 		+ "\"name\":null,"
 		+ "\"description\":null,"
 		+ "\"precConcParam\":[0.9,0.1],"
-		+ "\"attributesNumberParam\":[1,3]"
+		+ "\"attributesNumberParam\":[1,3],"
+		+ "\"rules\":null,"
+		+ "\"rulesParam\":null,"
+		+ "\"rulesNumberParam\":null"
 		+ "}";
 	
 	public void printConfiguration() throws JsonGenerationException, JsonMappingException, IOException {
@@ -36,9 +40,9 @@ public class TableConfiguratorTest {
 		TableConfigurator tableConfigurator = mapper.readValue(CONFIGURATION, TableConfigurator.class);
 		Random random = new Random();
 		LinkedList<Attribute> attributes = new LinkedList<Attribute>();
-		attributes.add(null); //TODO gen attributes
-		attributes.add(null);
-		attributes.add(null);
+		for (int i = 0; i < tableConfigurator.getAttributesNumberParam()[1]; i++) {
+			attributes.add(null);
+		}
 		Table table1 = tableConfigurator.generateTable(random, attributes);
 	}
 

@@ -2,6 +2,7 @@ package heart.xttgenerator;
 
 
 import heart.xtt.Attribute;
+import heart.xtt.Table;
 import heart.xtt.Type;
 
 import java.io.BufferedWriter;
@@ -16,7 +17,21 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 public class AttributeConfiguratorTest {
+	
 	private static final String CONFIGURATION = 
+		"{"
+		+ "\"id\":null,"
+		+ "\"name\":null,"
+		+ "\"comm\":null,"
+		+ "\"commParam\":[0.1,0.2,0.3,0.4,0.5],"
+		+ "\"xttClass\":null,"
+		+ "\"xttClassParam\":[0.1,0.4,0.3,0.2,0.9],"
+		+ "\"description\":\"description1\","
+		+ "\"type\":null,"
+		+ "\"typeParam\":[0.2,0.4,0.6,0.8]"
+		+ "}";
+	
+	private static final String TYPE_CONFIGURATION = 
 			"{"
 			+ "\"id\":null,"
 			+ "\"name\":null,"
@@ -39,11 +54,23 @@ public class AttributeConfiguratorTest {
 				+ "\"valuesLengthParam\":[3,5]"
 				+ "}"
 			+ "}";
+
 	@Test
+	public void generateAttributeTest() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AttributeConfigurator attributeConfigurator = mapper.readValue(CONFIGURATION, AttributeConfigurator.class);
+		Random random = new Random();
+		LinkedList<Type> types = new LinkedList<Type>();
+		for (int i = 0; i < 10; i++) {
+			types.add(null);
+		}
+		Attribute attribute1 = attributeConfigurator.generateAttribute(random, types);
+	}
+	
 	public void test() throws Exception {
 		AttributeConfigurator attributeConfigurator = new AttributeConfigurator();
 		attributeConfigurator.setCommParam(new Double[]{0.1, 0.2, 0.3, 0.4, 0.5});
-		attributeConfigurator.setXTTClassParam(new Double[]{0.1, 0.4, 0.3, 0.2, 0.9});
+		attributeConfigurator.setXttClassParam(new Double[]{0.1, 0.4, 0.3, 0.2, 0.9});
 		attributeConfigurator.setDescription("description1");
 		attributeConfigurator.setTypeParam(new Double[]{0.2, 0.4, 0.6, 0.8});
 		
@@ -62,7 +89,7 @@ public class AttributeConfiguratorTest {
 		bw.write(attributeConfiguratorString);
 		bw.close();
 		
-		TypeConfigurator typeConfigurator = mapper.readValue(CONFIGURATION, TypeConfigurator.class);
+		TypeConfigurator typeConfigurator = mapper.readValue(TYPE_CONFIGURATION, TypeConfigurator.class);
 		Random random = new Random();
 
 		LinkedList<Type> types = new LinkedList<Type>() ;
