@@ -40,8 +40,8 @@ public class AttributeConfigurator {
 	 * A field that denotes weather the attribute is simple (represents simple values) 
 	 * or general (represents set values).
 	 */
-	private String XTTClass;
-	private Double[] XTTClassParam;
+	private String xttClass;
+	private Double[] xttClassParam;
 	
 	private String description;
 
@@ -82,17 +82,17 @@ public class AttributeConfigurator {
 	public void setCommParam(Double[] commParam) {
 		this.commParam = commParam;
 	}
-	public String getXTTClass() {
-		return XTTClass;
+	public String getXttClass() {
+		return xttClass;
 	}
-	public void setXTTClass(String xTTClass) {
-		XTTClass = xTTClass;
+	public void setXttClass(String xTTClass) {
+		xttClass = xTTClass;
 	}
-	public Double[] getXTTClassParam() {
-		return XTTClassParam;
+	public Double[] getXttClassParam() {
+		return xttClassParam;
 	}
-	public void setXTTClassParam(Double[] xTTClassParam) {
-		XTTClassParam = xTTClassParam;
+	public void setXttClassParam(Double[] xTTClassParam) {
+		xttClassParam = xTTClassParam;
 	}
 	public String getDescription() {
 		return description;
@@ -118,8 +118,8 @@ public class AttributeConfigurator {
 		if(this.comm == null && this.commParam == null) return false;
 		if(this.commParam.length!=5) return false;
 		if(this.comm != null && !(this.comm.equals(this.COMM_IN)|| this.comm.equals(this.COMM_OUT)|| this.comm.equals(this.COMM_INTER)||this.comm.equals(this.COMM_COMM) || this.comm.equals(this.COMM_UNKNOWN))) return false;
-		if(this.XTTClass == null && this.XTTClassParam == null) return false;
-		if(this.XTTClass != null && !(this.XTTClass.equals(this.CLASS_SIMPLE)||this.XTTClass.equals(this.CLASS_GENERAL)||this.XTTClass.equals(this.CLASS_UNKNOWN))) return false;
+		if(this.xttClass == null && this.xttClassParam == null) return false;
+		if(this.xttClass != null && !(this.xttClass.equals(this.CLASS_SIMPLE)||this.xttClass.equals(this.CLASS_GENERAL)||this.xttClass.equals(this.CLASS_UNKNOWN))) return false;
 //		if(this.expirationTime != null ) return false;
 		if(this.type == null && this.typeParam == null) return false;
 		return true;
@@ -131,8 +131,8 @@ public class AttributeConfigurator {
 	private String name; done
 	private String comm; done ?
 	private String[] commParam; done ?
-	private String XTTClass; done
-	private String[] XTTClassParam; done
+	private String xttClass; done
+	private String[] xttClassParam; done
 	private String description; done
 	private Type type; done ?
 	 */
@@ -177,20 +177,20 @@ public class AttributeConfigurator {
 						this.comm = COMM_UNKNOWN;
 					}
 				}
-				if(this.XTTClass != null) builder.setXTTClass(this.XTTClass);
+				if(this.xttClass != null) builder.setXTTClass(this.xttClass);
 				else{
 					Double shot = random.nextDouble();
-					if (this.XTTClassParam[0] > shot) {
+					if (this.xttClassParam[0] > shot) {
 						builder.setXTTClass(CLASS_SIMPLE);
-						this.XTTClass = CLASS_SIMPLE;
+						this.xttClass = CLASS_SIMPLE;
 					}
-					else if (this.XTTClassParam[0] + this.XTTClassParam[1] > shot) {
+					else if (this.xttClassParam[0] + this.xttClassParam[1] > shot) {
 						builder.setXTTClass(CLASS_GENERAL);
-						this.XTTClass = CLASS_GENERAL;
+						this.xttClass = CLASS_GENERAL;
 					}
 					else {
 						builder.setXTTClass(CLASS_UNKNOWN);
-						this.XTTClass = CLASS_UNKNOWN;
+						this.xttClass = CLASS_UNKNOWN;
 					}
 				}
 				attribute = builder.build();

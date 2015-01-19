@@ -138,7 +138,13 @@ public class TableConfigurator {
 	public void setRulesParam(RuleConfigurator rulesParam) {
 		this.rulesParam = rulesParam;
 	}
-	
-	
+
+	public int[] getRulesNumberParam() {
+		return rulesNumberParam;
+	}
+
+	public void setRulesNumberParam(int[] rulesNumberParam) {
+		this.rulesNumberParam = rulesNumberParam;
+	}
 	
 }
