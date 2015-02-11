@@ -142,6 +142,7 @@ public class AttributeConfigurator {
 			//dlugosc typeParam zgadza sie z liczba typow w types.
 			if(this.typeParam.length != types.size()){
 				for(int i=0; i<types.size();i++){
+					this.typeParam =  new Double[types.size()];
 					this.typeParam[i]=0.1;
 				}
 					
