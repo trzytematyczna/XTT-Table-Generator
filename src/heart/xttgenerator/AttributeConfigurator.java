@@ -183,7 +183,7 @@ public class AttributeConfigurator {
 						builder.setComm(COMM_UNKNOWN);
 						this.comm = COMM_UNKNOWN;
 					}
-//				}
+				}
 				if(this.xttClass != null) builder.setXTTClass(this.xttClass);
 				else{
 					Double shot2 = random.nextDouble();
@@ -201,15 +201,12 @@ public class AttributeConfigurator {
 					}
 				}
 				attribute = builder.build();
-			}
+//			}
 //			if(this.expirationTime != null) builder.setExpirationTime(this.expirationTime);
 //			else{
 //				Long pickedExpTime = random.nextLong();
 //				builder.setExpirationTime(pickedExpTime);
 //			}
-		}
-		else{
-			
 		}
 		AttributeConfigurator.ATTR_COUNTER++;
 		this.attributes.add(attribute);

@@ -83,7 +83,8 @@ public class XTTConfiguratorTest {
 		ObjectMapper mapper = new ObjectMapper();
 		XTTConfigurator xttConfigurator = mapper.readValue(CONFIGURATION, XTTConfigurator.class);
 		Random random = new Random();
-		XTTModel xttModel = xttConfigurator.generateXTTModel(random);
+ 		XTTModel xttModel = xttConfigurator.generateXTTModel(random);
+		int i=0;
 	}
 
 }
