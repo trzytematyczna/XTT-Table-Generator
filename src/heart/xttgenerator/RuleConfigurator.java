@@ -3,6 +3,7 @@ package heart.xttgenerator;
 import heart.Action;
 import heart.alsvfd.Formulae;
 import heart.alsvfd.Formulae.Builder;
+import heart.alsvfd.Formulae.ConditionalOperator;
 import heart.xtt.Attribute;
 import heart.xtt.Decision;
 import heart.xtt.Rule;
@@ -66,7 +67,23 @@ public class RuleConfigurator {
 			builder.setRuleId(ri);
 			Integer form = random.nextInt(this.formulaeParam[1] - this.formulaeParam[0]) + this.formulaeParam[0];
 			for(int i=0; i<form; i++){
-//				conditions.add()
+				Integer att = random.nextInt((precondition.size()-1));
+				Attribute attrib = precondition.get(att);
+				
+				Formulae.ConditionalOperator co = null;
+				Integer operator = random.nextInt(12-1)+1;
+				switch(operator){
+					case 1 : 
+						co = ConditionalOperator.EQ;
+						break;
+					case 2 :
+						co =  ConditionalOperator.GT;
+				}
+				Formulae formul = new Formulae();
+				formul.setAttribute(attrib);
+				formul.setOp(co);
+				formul.setValue(attrib.getType().getDomain());
+//				conditions.add(builder.buildConditions(attributes);
 //				conditions.add(this.formulaeConf.generateFormulae(random, precondition));
 			}
 			builder.setConditions(this.conditions);
@@ -76,6 +93,7 @@ public class RuleConfigurator {
 			}
 
 			rule.setOrderNumber(RuleConfigurator.RULE_COUNTER);
+			builder.build();
 			//TODO
 			RuleConfigurator.RULE_COUNTER++;
 			RuleConfigurator.rules.add(rule);
