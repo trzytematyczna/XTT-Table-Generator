@@ -140,7 +140,13 @@ public class AttributeConfigurator {
 		Attribute attribute = null;
 		if(this.validateConfiguration()){
 			//dlugosc typeParam zgadza sie z liczba typow w types.
-			if(this.typeParam.length == types.size()){
+			if(this.typeParam.length != types.size()){
+				for(int i=0; i<types.size();i++){
+					this.typeParam[i]=0.1;
+				}
+					
+			}
+//			else{
 				Attribute.Builder builder = new Attribute.Builder();
 				if(this.id != null) builder.setId(this.id);
 				else builder.setId(new String(GEN_ID + ATTR_COUNTER));
@@ -176,15 +182,15 @@ public class AttributeConfigurator {
 						builder.setComm(COMM_UNKNOWN);
 						this.comm = COMM_UNKNOWN;
 					}
-				}
+//				}
 				if(this.xttClass != null) builder.setXTTClass(this.xttClass);
 				else{
-					Double shot = random.nextDouble();
-					if (this.xttClassParam[0] > shot) {
+					Double shot2 = random.nextDouble();
+					if (this.xttClassParam[0] > shot2) {
 						builder.setXTTClass(CLASS_SIMPLE);
 						this.xttClass = CLASS_SIMPLE;
 					}
-					else if (this.xttClassParam[0] + this.xttClassParam[1] > shot) {
+					else if (this.xttClassParam[0] + this.xttClassParam[1] > shot2) {
 						builder.setXTTClass(CLASS_GENERAL);
 						this.xttClass = CLASS_GENERAL;
 					}
