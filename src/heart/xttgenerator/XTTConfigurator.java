@@ -57,6 +57,7 @@ public class XTTConfigurator {
 			}
 			xttModel.setTables(tables);
 			xttModel.setAttributes(attributes);
+			xttModel.setTypes(types);
 			return xttModel;
 		}
 		else {
