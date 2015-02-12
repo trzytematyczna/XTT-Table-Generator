@@ -76,8 +76,9 @@ public class RuleConfigurator {
 				Integer att = random.nextInt((precondition.size()-1));
 				Attribute attrib = precondition.get(att);
 				System.out.println(attrib);
+				System.out.println(attrib.getName());
 				Formulae.ConditionalOperator co = null;
-				Integer operator = random.nextInt(12-1)+1;
+				Integer operator = random.nextInt(2-1)+1;
 				switch(operator){
 					case 1 : 
 						co = ConditionalOperator.EQ;
@@ -95,6 +96,7 @@ public class RuleConfigurator {
 
 				Formulae.Builder form_builder = new Formulae.Builder();
 				form_builder.setAttribute(attrib);
+				form_builder.setAttributeName(attrib.getName());
 				form_builder.setOp(co);
 				form_builder.setValue(attrib.getType().getDomain());
 				System.out.println(form_builder.getAttributeName());
