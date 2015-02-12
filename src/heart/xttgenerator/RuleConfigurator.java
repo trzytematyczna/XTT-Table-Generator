@@ -67,16 +67,16 @@ public class RuleConfigurator {
 //			else rule.setId(RuleConfigurator.GEN_ID + RuleConfigurator.RULE_COUNTER);
 			
 			builder.setRuleId(ri);
+			rule.setId(RuleConfigurator.GEN_ID+RuleConfigurator.RULE_COUNTER);
 			rule.setOrderNumber(RuleConfigurator.RULE_COUNTER);
 			rule.setSchemeName(ri.schemeName);
 			
-			Integer form = random.nextInt(this.formulaeParam[1] - this.formulaeParam[0]) + this.formulaeParam[0];
+//			Integer form = random.nextInt(this.formulaeParam[1] - this.formulaeParam[0]) + this.formulaeParam[0];
 			HashMap<String , Attribute> map_formulae = new HashMap<String, Attribute>();
-			for(int i=0; i<form; i++){
-				Integer att = random.nextInt((precondition.size()-1));
-				Attribute attrib = precondition.get(att);
-				System.out.println(attrib);
-				System.out.println(attrib.getName());
+			for(int i=0; i<precondition.size(); i++){
+//				Integer att = random.nextInt((precondition.size()-1));				
+//				Attribute attrib = precondition.get(att);
+				Attribute attrib = precondition.get(i);
 				Formulae.ConditionalOperator co = null;
 				Integer operator = random.nextInt(2-1)+1;
 				switch(operator){
@@ -89,7 +89,7 @@ public class RuleConfigurator {
 				Formulae formul = new Formulae();
 				formul.setAttribute(attrib);
 				formul.setOp(co);
-				formul.setValue(attrib.getType().getDomain());
+				formul.setValue(attrib.getType().getDomain()); //TODO: wylosowanie wartosci value ? (teraz: caly przedzial)
 				
 				//dodatnie do mapy potrzebnej dla buildera w setConditions
 				map_formulae.put(attrib.getName(), attrib);
@@ -99,7 +99,6 @@ public class RuleConfigurator {
 				form_builder.setAttributeName(attrib.getName());
 				form_builder.setOp(co);
 				form_builder.setValue(attrib.getType().getDomain());
-				System.out.println(form_builder.getAttributeName());
 				//dodanei do incConditions
 				conditions.add(form_builder);
 			}
@@ -107,34 +106,41 @@ public class RuleConfigurator {
 			builder.setConditions(this.conditions);
 			builder.buildConditions(map_formulae);
 			
-			Integer dec = random.nextInt(this.decisionParam[1] - this.decisionParam[0]) + this.decisionParam[0];
+//			Integer dec = random.nextInt(this.decisionParam[1] - this.decisionParam[0]) + this.decisionParam[0];
 			HashMap<String , Attribute> map_decisions = new HashMap<String, Attribute>();
-			for(int i=0; i<dec; i++){
-				Integer att = random.nextInt((conclusion.size()-1));
-				Attribute attrib = conclusion.get(att);
+			for(int i=0; i<conclusion.size(); i++){
+//				Integer att = random.nextInt((conclusion.size()-1));
+//				Attribute attrib = conclusion.get(att);
+			
+				Attribute attrib = conclusion.get(i);
 				
 				Decision decis = new Decision();
 				decis.setAttribute(attrib);
-				decis.setDecision(attrib.getType().getDomain());
+				decis.setDecision(attrib.getType().getDomain()); //TODO analogicznie
 				
 				map_decisions.put(attrib.getName(), attrib);
 
 				Decision.Builder dec_builder = new Decision.Builder(); 
 				dec_builder.setAttribute(attrib);
 				dec_builder.setAttributeName(attrib.getName());
-				dec_builder.setDecision(decis.getDecision());
+//				dec_builder.setDecision(decis.getDecision());
+				dec_builder.setIncompleteDecision(decis.getDecision());
 
 				decisions.add(dec_builder);
 			}
-
             builder.setDecisions(decisions);
+            builder.buildDecisions(map_decisions);
             
-            rule.setActions(actions);
-
 			builder.build();
 			RuleConfigurator.RULE_COUNTER++;
 			RuleConfigurator.rules.add(rule);
 		}
+		System.out.println(rule.getActions());
+		System.out.println(rule.getConditions());
+		System.out.println(rule.getDecisions());
+		System.out.println(rule.getName());
+		System.out.println(rule.getId());
+		
 		return rule;
 	}
 
