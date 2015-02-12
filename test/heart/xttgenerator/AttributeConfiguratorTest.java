@@ -2,6 +2,7 @@ package heart.xttgenerator;
 
 
 import heart.xtt.Attribute;
+import heart.xtt.Rule;
 import heart.xtt.Table;
 import heart.xtt.Type;
 
@@ -17,7 +18,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 public class AttributeConfiguratorTest {
-	
 	private static final String CONFIGURATION = 
 		"{"
 		+ "\"id\":null,"
@@ -55,18 +55,19 @@ public class AttributeConfiguratorTest {
 				+ "}"
 			+ "}";
 
+//	@Test
+//	public void generateAttributeTest() throws Exception {
+//		ObjectMapper mapper = new ObjectMapper();
+//		AttributeConfigurator attributeConfigurator = mapper.readValue(CONFIGURATION, AttributeConfigurator.class);
+//		Random random = new Random();
+//		LinkedList<Type> types = new LinkedList<Type>();
+//		for (int i = 0; i < 10; i++) {
+//			types.add(null);
+//		}
+//		Attribute attribute1 = attributeConfigurator.generateAttribute(random, types);
+//	}
+
 	@Test
-	public void generateAttributeTest() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		AttributeConfigurator attributeConfigurator = mapper.readValue(CONFIGURATION, AttributeConfigurator.class);
-		Random random = new Random();
-		LinkedList<Type> types = new LinkedList<Type>();
-		for (int i = 0; i < 10; i++) {
-			types.add(null);
-		}
-		Attribute attribute1 = attributeConfigurator.generateAttribute(random, types);
-	}
-	
 	public void test() throws Exception {
 		AttributeConfigurator attributeConfigurator = new AttributeConfigurator();
 		attributeConfigurator.setCommParam(new Double[]{0.1, 0.2, 0.3, 0.4, 0.5});
@@ -98,6 +99,16 @@ public class AttributeConfiguratorTest {
 			types.add(type1);
 		}
 		Attribute attr = attributeConfigurator.generateAttribute(new Random(), types);
+		
+		
+		RuleConfigurator ruleConfigurator = new RuleConfigurator();
+		ruleConfigurator.setDecisionParam(new Integer[]{1,2});
+		ruleConfigurator.setFormulaeParam(new Integer[]{1,2});
+		
+		LinkedList<Attribute> att = new LinkedList<Attribute>();
+		att.add(attr);
+		att.add(attr);
+		Rule r = ruleConfigurator.generateRule(new Random(), att, att);
 		int i=0;
 //		String typeString = mapper.writeValueAsString(type);
 //		
