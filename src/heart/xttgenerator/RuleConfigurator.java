@@ -124,7 +124,7 @@ public class RuleConfigurator {
 				dec_builder.setAttribute(attrib);
 				dec_builder.setAttributeName(attrib.getName());
 //				dec_builder.setDecision(decis.getDecision());
-				dec_builder.setIncompleteDecision(decis.getDecision());
+//				dec_builder.setIncompleteDecision(decis.getDecision());
 
 				decisions.add(dec_builder);
 			}

@@ -105,11 +105,10 @@ public class AttributeConfiguratorTest {
 		ruleConfigurator.setDecisionParam(new Integer[]{1,2});
 		ruleConfigurator.setFormulaeParam(new Integer[]{1,2});
 		
-		LinkedList<Attribute> att = new LinkedList<Attribute>();
-		att.add(attr);
-		att.add(attr);
-		Rule r = ruleConfigurator.generateRule(new Random(), att, att);
-		int i=0;
+//		LinkedList<Attribute> att = new LinkedList<Attribute>();
+//		att.add(attr);
+//		att.add(attr);
+//		Rule r = ruleConfigurator.generateRule(new Random(), att, att);
 //		String typeString = mapper.writeValueAsString(type);
 //		
 //		file = new File("GeneratedType.txt");
